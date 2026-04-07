@@ -1,0 +1,79 @@
+{
+  "count": 3,
+  "metrics": {
+    "global_rmse": {
+      "mean": 0.018323184010314707,
+      "std": 3.419632127322458e-05
+    },
+    "global_mae": {
+      "mean": 0.0135011778974656,
+      "std": 3.3816508681979334e-05
+    },
+    "global_rel_l1_mean": {
+      "mean": 31.329801580325874,
+      "std": 6.593490783680306
+    },
+    "global_rel_l1_active_mean": {
+      "mean": 30.157297240412635,
+      "std": 5.2785573794232326
+    },
+    "global_rel_l2": {
+      "mean": 12.720620915459781,
+      "std": 2.7187314913342924
+    },
+    "mass_mean_rel_error": {
+      "mean": 3.055881935041045,
+      "std": 0.49533658672218356
+    }
+  },
+  "rows": [
+    {
+      "case_index": 0,
+      "case_id": "case_0007",
+      "raw_case_name": "100,0,0,1000mlmin",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "1000",
+      "global_rmse": 0.018366303015557642,
+      "global_mae": 0.013543770591963903,
+      "global_rel_l1_mean": 23.990276302025784,
+      "global_rel_l1_active_mean": 23.958449903099904,
+      "global_rel_l2": 9.731504560778772,
+      "mass_mean_rel_error": 2.5093534865183633,
+      "eval_json": "exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0007_eval.json"
+    },
+    {
+      "case_index": 1,
+      "case_id": "case_0008",
+      "raw_case_name": "100,0,0,600mlmin",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "600",
+      "global_rmse": 0.0182826601695008,
+      "global_mae": 0.013461047241875333,
+      "global_rel_l1_mean": 39.98049862866173,
+      "global_rel_l1_active_mean": 36.85886898741244,
+      "global_rel_l2": 16.309490183969185,
+      "mass_mean_rel_error": 3.7086425261294185,
+      "eval_json": "exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0008_eval.json"
+    },
+    {
+      "case_index": 2,
+      "case_id": "case_0009",
+      "raw_case_name": "100,0,0,800mlmin",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "800",
+      "global_rmse": 0.018320588845885673,
+      "global_mae": 0.013498715858557563,
+      "global_rel_l1_mean": 30.018629810290108,
+      "global_rel_l1_active_mean": 29.654572830725563,
+      "global_rel_l2": 12.120868001631388,
+      "mass_mean_rel_error": 2.9496497924753524,
+      "eval_json": "exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0009_eval.json"
+    }
+  ]
+}

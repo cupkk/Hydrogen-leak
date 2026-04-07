@@ -1,0 +1,35 @@
+{
+  "dataset_prefix": "cfd16_holdout100_mini_eval",
+  "num_cases": 3,
+  "cases": [
+    {
+      "case_id": "case_0007",
+      "raw_case_name": "100,0,0,1000mlmin",
+      "data_index": 0,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/sensors/case_0007_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd16_holdout100_mini_eval_case_0007_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0007_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0007_per_time.csv"
+    },
+    {
+      "case_id": "case_0008",
+      "raw_case_name": "100,0,0,600mlmin",
+      "data_index": 1,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/sensors/case_0008_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd16_holdout100_mini_eval_case_0008_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0008_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0008_per_time.csv"
+    },
+    {
+      "case_id": "case_0009",
+      "raw_case_name": "100,0,0,800mlmin",
+      "data_index": 2,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/sensors/case_0009_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd16_holdout100_mini_eval_case_0009_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0009_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/eval/case_0009_per_time.csv"
+    }
+  ],
+  "aggregate_json": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/aggregate_metrics.json",
+  "aggregate_csv": "/root/Hydrogen-leak/SDIFT_model/exps/exps_cfd16_holdout100_mini_cfd16_holdout100_train_20260404-2250/holdout_eval/aggregate_metrics.csv"
+}

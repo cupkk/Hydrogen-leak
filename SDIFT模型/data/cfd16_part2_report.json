@@ -1,0 +1,82 @@
+{
+  "scan_roots": [
+    "F:\\氢泄露",
+    "D:\\BaiduNetdiskDownload\\0,-150,0,1000mlmin",
+    "D:\\BaiduNetdiskDownload\\6,100,0,0-1000,800,600"
+  ],
+  "case_count_discovered": 6,
+  "case_count_converted": 6,
+  "skipped_cases": [],
+  "repaired_cases": [
+    {
+      "case_name": "200,-150,0,400mlmin",
+      "case_id": "case_0005",
+      "repaired_frames": [
+        {
+          "t_idx": 16,
+          "time": 17.0,
+          "file": "F:\\氢泄露\\200,-150,0,400mlmin\\all\\200,-150,400-17.0",
+          "reason": "invalid column index 4 at row 4718592 with 4 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 16.0,
+          "source_right_time": 21.0
+        },
+        {
+          "t_idx": 17,
+          "time": 18.0,
+          "file": "F:\\氢泄露\\200,-150,0,400mlmin\\all\\200,-150,400-18.0",
+          "reason": "invalid column index 4 at row 3145728 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 16.0,
+          "source_right_time": 21.0
+        },
+        {
+          "t_idx": 18,
+          "time": 19.0,
+          "file": "F:\\氢泄露\\200,-150,0,400mlmin\\all\\200,-150,400-19.0",
+          "reason": "could not convert string '1\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x to float32 at row 1756363, column 5.",
+          "repair_mode": "linear_interp",
+          "source_left_time": 16.0,
+          "source_right_time": 21.0
+        },
+        {
+          "t_idx": 19,
+          "time": 20.0,
+          "file": "F:\\氢泄露\\200,-150,0,400mlmin\\all\\200,-150,400-20.0",
+          "reason": "invalid column index 4 at row 419430 with 4 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 16.0,
+          "source_right_time": 21.0
+        }
+      ]
+    }
+  ],
+  "selected_steps": 120,
+  "bins": 48,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "data\\cfd16_part2.h5",
+  "output_meta": "data\\cfd16_part2_meta.npy",
+  "output_manifest": "data\\cfd16_part2_manifest.csv",
+  "output_report": "data\\cfd16_part2_report.json",
+  "output_h5_size_gb": 0.2387,
+  "output_meta_size_mb": 12.6591,
+  "raw_selected_total_gb": 282.0013,
+  "estimated_float32_uncompressed_gb": 0.2966,
+  "conversion_wall_time_sec": 2477.0
+}

@@ -1,0 +1,45 @@
+{
+  "input_h5": "SDIFT模型/data/cfd16_all_T120_interp48.h5",
+  "manifest_csv": "SDIFT模型/data/cfd16_all_T120_interp48_manifest.csv",
+  "dataset_key": "data",
+  "holdout_positions_mm": [
+    [
+      100,
+      0,
+      0
+    ]
+  ],
+  "train": {
+    "count": 13,
+    "positions": {
+      "0,-150,0": 7,
+      "200,-150,0": 6
+    },
+    "case_ids": [
+      "case_0000",
+      "case_0001",
+      "case_0002",
+      "case_0003",
+      "case_0004",
+      "case_0005",
+      "case_0006",
+      "case_0010",
+      "case_0011",
+      "case_0012",
+      "case_0013",
+      "case_0014",
+      "case_0015"
+    ]
+  },
+  "test": {
+    "count": 3,
+    "positions": {
+      "100,0,0": 3
+    },
+    "case_ids": [
+      "case_0007",
+      "case_0008",
+      "case_0009"
+    ]
+  }
+}

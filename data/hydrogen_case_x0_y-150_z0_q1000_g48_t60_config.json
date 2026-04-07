@@ -1,0 +1,19 @@
+{
+  "source_root": "D:\\BaiduNetdiskDownload\\1000_0.59",
+  "out_h5": "D:\\github\\Hydrogen-leak\\data\\hydrogen_case_x0_y-150_z0_q1000_g48_t60.h5",
+  "out_meta": "D:\\github\\Hydrogen-leak\\data\\hydrogen_case_x0_y-150_z0_q1000_g48_t60_meta.npy",
+  "out_manifest": "D:\\github\\Hydrogen-leak\\data\\hydrogen_case_x0_y-150_z0_q1000_manifest.csv",
+  "grid_size": [
+    48,
+    48,
+    48
+  ],
+  "time_start": 1.0,
+  "time_step": 2.0,
+  "time_steps": 60,
+  "interp_method": "idw",
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "num_cases": 1,
+  "mesh_groups": 1
+}

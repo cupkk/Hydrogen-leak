@@ -1,0 +1,39 @@
+{
+  "scan_roots": [
+    "F:\\氢泄露",
+    "D:\\BaiduNetdiskDownload\\0,-150,0,1000mlmin",
+    "D:\\BaiduNetdiskDownload\\6,100,0,0-1000,800,600"
+  ],
+  "case_count_discovered": 4,
+  "case_count_converted": 4,
+  "skipped_cases": [],
+  "repaired_cases": [],
+  "selected_steps": 120,
+  "bins": 48,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "data\\cfd16_part3.h5",
+  "output_meta": "data\\cfd16_part3_meta.npy",
+  "output_manifest": "data\\cfd16_part3_manifest.csv",
+  "output_report": "data\\cfd16_part3_report.json",
+  "output_h5_size_gb": 0.1589,
+  "output_meta_size_mb": 12.6591,
+  "raw_selected_total_gb": 183.8714,
+  "estimated_float32_uncompressed_gb": 0.1978,
+  "conversion_wall_time_sec": 2345.93
+}

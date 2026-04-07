@@ -1,0 +1,107 @@
+[
+  {
+    "path": "build_group_splits.py",
+    "size": 4296,
+    "sha256": "8d1644dc178caa9a8a8390811214105b33353a307905796b6fb26f3c77cfa6a0"
+  },
+  {
+    "path": "convert_cfd_ascii.py",
+    "size": 11271,
+    "sha256": "1004d24788c0e235ba0460b0b61114b4d3bb02864e32f757c80635108f17e01d"
+  },
+  {
+    "path": "data/cfd16_all_T120_interp48.h5",
+    "size": 683611447,
+    "sha256": "026dd9ce532804d415b20dae25040743ff76b421382d2712c80694b021d00a30"
+  },
+  {
+    "path": "data/cfd16_all_T120_interp48_manifest.csv",
+    "size": 3802,
+    "sha256": "4e0d8853af8dc94f8e59b7d5d26d43c9e14a82eab1967447e78796b72b734562"
+  },
+  {
+    "path": "data/cfd16_all_T120_interp48_meta.npy",
+    "size": 13274023,
+    "sha256": "409bf752dbf8de86bea8b94f5515f632541f611b401afa9c29fbc64d64faa090"
+  },
+  {
+    "path": "data/cfd16_all_T120_interp48_report.json",
+    "size": 459,
+    "sha256": "62e7c1c3e0a9db925cd62cb8f8ee4f551cc6ffd905243d6025deecc1125229a5"
+  },
+  {
+    "path": "data/sensors_real.csv",
+    "size": 906,
+    "sha256": "572cef7edf69474982f8b3353dff1bb2e34de5ef56adb1549567c206402e62c5"
+  },
+  {
+    "path": "data/sensors_real_12.csv",
+    "size": 341,
+    "sha256": "549acc187e1389c83bd4409ff549996f7e9446431718bd69a95e8fb768675ff3"
+  },
+  {
+    "path": "evaluate_reconstruction.py",
+    "size": 7832,
+    "sha256": "9444c068c8b974a27a96af4d582e38b82d977152e794bfbcc5f2d9ec2ac6e24d"
+  },
+  {
+    "path": "export_recon_vtk.py",
+    "size": 5881,
+    "sha256": "507ba585793c5a61641b2cf1a33c5e6ad2a7a9c3d23f2be1591034f804a7f136"
+  },
+  {
+    "path": "FTM_model.py",
+    "size": 12761,
+    "sha256": "aa9a8b89a85c75e5878ac9a672f0c4be0089ca9a6d429629808ab2b181c898a9"
+  },
+  {
+    "path": "make_sensor_observations.py",
+    "size": 8313,
+    "sha256": "633dd04a69511cdba3cc6bd89bed4591660831687576036313e06670b803b912"
+  },
+  {
+    "path": "merge_cfd_dataset_parts.py",
+    "size": 3374,
+    "sha256": "8473f8f42e9b54dfcb036de5a9153f0fee21e37ad9cac0cf074902d34ea905f3"
+  },
+  {
+    "path": "message_passing_DPS.py",
+    "size": 24675,
+    "sha256": "85e0cd4d6329fa679df83a40e92d935f10e0bb2e5c3ab564294e13bd5f3d376c"
+  },
+  {
+    "path": "networks_edm.py",
+    "size": 68382,
+    "sha256": "1ab00b5e025c27a947c7605fe940e6b54db3ed85b4f78487601793c8faf6477c"
+  },
+  {
+    "path": "preprocessing_data.py",
+    "size": 8976,
+    "sha256": "08a16eb8f362be08a73f5a66c5d4fe6a6e2685607f2c0aaf490bdd5e7f76ae16"
+  },
+  {
+    "path": "README.md",
+    "size": 7032,
+    "sha256": "e56a40a5be5721ffacaa579a7eaa540a9a04e654e00465362ae9af7a051720cb"
+  },
+  {
+    "path": "requirements.txt",
+    "size": 105,
+    "sha256": "57fac0026c0cd2b5f9310f47d5d049af76a37f1bcf6b44c01e0047a6ac298f7f"
+  },
+  {
+    "path": "train_FTM.py",
+    "size": 7599,
+    "sha256": "7cb0a4d282617add2def4057fb25fbeee7c66791891621a58bc1a3d5fabaf7b1"
+  },
+  {
+    "path": "train_GPSD.py",
+    "size": 19024,
+    "sha256": "5c7c95984baf7377e407902ddb9353564a9eabaaecf6bde3e5f1c61cdceab37e"
+  },
+  {
+    "path": "utils.py",
+    "size": 8253,
+    "sha256": "44deca76b72c0e6c20e9d77f855400542caa1eec92027131f1a8e26246eab254"
+  }
+]

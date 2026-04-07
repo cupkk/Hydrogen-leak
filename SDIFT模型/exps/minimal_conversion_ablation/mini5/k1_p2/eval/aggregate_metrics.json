@@ -1,0 +1,63 @@
+{
+  "count": 2,
+  "metrics": {
+    "global_rmse": {
+      "mean": 0.0023172894499273945,
+      "std": 4.600919912759252e-05
+    },
+    "global_mae": {
+      "mean": 0.0017340529292202123,
+      "std": 4.7054561261116075e-05
+    },
+    "global_rel_l1_mean": {
+      "mean": 30.253974281499556,
+      "std": 17.113159826796373
+    },
+    "global_rel_l1_active_mean": {
+      "mean": 13.633985238015256,
+      "std": 6.698600914231366
+    },
+    "global_rel_l2": {
+      "mean": 7.877335644437602,
+      "std": 4.833312800652835
+    },
+    "mass_mean_rel_error": {
+      "mean": 12.45670439195063,
+      "std": 7.838995326006425
+    }
+  },
+  "rows": [
+    {
+      "case_index": 0,
+      "case_id": "case_0001",
+      "raw_case_name": "Q100-X400-Y0-Fraction",
+      "source_x_mm": "400",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.002363298649054987,
+      "global_mae": 0.0017811074904813284,
+      "global_rel_l1_mean": 47.36713410829593,
+      "global_rel_l1_active_mean": 20.332586152246623,
+      "global_rel_l2": 12.710648445090438,
+      "mass_mean_rel_error": 20.295699717957056,
+      "eval_json": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k1_p2\\eval\\eval\\case_0001_eval.json"
+    },
+    {
+      "case_index": 1,
+      "case_id": "case_0004",
+      "raw_case_name": "Q400-X400-Y0-Fraction",
+      "source_x_mm": "400",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "400",
+      "global_rmse": 0.002271280250799802,
+      "global_mae": 0.0016869983679590962,
+      "global_rel_l1_mean": 13.140814454703182,
+      "global_rel_l1_active_mean": 6.93538432378389,
+      "global_rel_l2": 3.0440228437847674,
+      "mass_mean_rel_error": 4.617709065944206,
+      "eval_json": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k1_p2\\eval\\eval\\case_0004_eval.json"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+case_id,case_name,leak_rate_ml_min,source_x_mm,source_y_mm,source_z_mm,duration_s_used,time_start_s,time_step_s,time_steps,raw_frame_count,raw_time_min_s,raw_time_max_s,mesh_signature_id,space_id,obstacle_id,vent_id,source_id
+case_000,X100_Y0_Z0_Q600,600,100,0,0,118.0,1.0,2.0,60,120,1.0,120.0,0,space_main,obstacle_fixed,vent_fixed,x100_y0_z0
+case_001,X100_Y0_Z0_Q800,800,100,0,0,118.0,1.0,2.0,60,120,1.0,120.0,1,space_main,obstacle_fixed,vent_fixed,x100_y0_z0
+case_002,X100_Y0_Z0_Q1000,1000,100,0,0,118.0,1.0,2.0,60,120,1.0,120.0,2,space_main,obstacle_fixed,vent_fixed,x100_y0_z0

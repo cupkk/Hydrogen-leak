@@ -1,0 +1,6 @@
+case_name,data_dir,role
+Q100-X300-Y0-Fraction,E:\氢泄漏\Q100-X300-Y0-Fraction,train
+Q400-X300-Y0-Fraction,E:\氢泄漏\Q400-X300-Y0-Fraction,train
+Q1000-X300-Y0-Fraction,E:\氢泄漏\Q1000-X300-Y0-Fraction,train
+Q100-X400-Y0-Fraction,E:\氢泄漏\Q100-X400-Y0-Fraction,test
+Q400-X400-Y0-Fraction,E:\氢泄漏\Q400-X400-Y0-Fraction,test

@@ -1,0 +1,83 @@
+converted_cases=5
+output_h5=D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2.h5
+output_meta=D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy
+output_manifest=D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_manifest.csv
+output_report=D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_report.json
+output_h5_size_gb=0.1931
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\train.h5
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test.h5
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\split.json
+device: cuda:0
+load data completed
+data_size: (3, 120, 48, 48, 48)
+mask_ratio: 1.0
+data_name: abl_mini5_k1_p2 R_size: (4, 8, 8)
+evaluating....
+(rmse,mae): (0.032581642270088196, 0.020293043926358223)
+epoch: 0 RMSE loss: 0.032581642270088196 
+
+epoch: 20 RMSE loss: 0.05167420953512192 
+
+epoch: 40 RMSE loss: 0.0029629399068653584 
+
+epoch: 60 RMSE loss: 0.0012838816037401557 
+
+epoch: 80 RMSE loss: 0.0011601848527789116 
+
+epoch: 100 RMSE loss: 0.0011466295691207051 
+
+epoch: 120 RMSE loss: 0.0011424002004787326 
+
+epoch: 140 RMSE loss: 0.0011389654828235507 
+
+epoch: 160 RMSE loss: 0.001134658930823207 
+
+epoch: 180 RMSE loss: 0.0011187456548213959 
+
+epoch: 200 RMSE loss: 0.0008845916017889977 
+
+epoch: 220 RMSE loss: 0.0008310530101880431 
+
+epoch: 240 RMSE loss: 0.0008149385685101151 
+
+epoch: 260 RMSE loss: 0.0008044007699936628 
+
+epoch: 280 RMSE loss: 0.000793451617937535 
+
+epoch: 300 RMSE loss: 0.0007807587389834225 
+
+epoch: 320 RMSE loss: 0.0007655437220819294 
+
+epoch: 340 RMSE loss: 0.0007465928792953491 
+
+epoch: 360 RMSE loss: 0.0007215436198748648 
+
+epoch: 380 RMSE loss: 0.0006852782098576427 
+
+save core/basis (last) successfully
+Device: cuda:0
+-------------------------------------------------------------------------
+outdir: exps/abl_mini5_k1_p2_abl_mini5_k1_p2_20260407-0847
+core shape:  torch.Size([3, 120, 4, 8, 8]) core_mean: tensor(0.4946, device='cuda:0') core_std:  tensor(0.0092, device='cuda:0')
+number of trainable parameters of phi model in optimizer:  19201641
+sampling
+Elapsed time: 7.7386 seconds
+sampling  12  steps completed
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0001_eval.json
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0001_per_time.csv
+sampling
+Elapsed time: 7.1438 seconds
+sampling  12  steps completed
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0004_eval.json
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0004_per_time.csv
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.json
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.csv
+RUN: D:\Anaconda\python.exe make_sensor_observations.py --field_h5 D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test.h5 --metadata_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --out D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\sensors\case_0001_sensors.npy --sensor_csv D:\github\Hydrogen-leak\SDIFT模型\data\sensors_real_12.csv --sample_index 0
+RUN: D:\Anaconda\python.exe message_passing_DPS.py --dataset abl_mini5_k1_p2_case_0001 --spatial_dims 3 --img_size_3d 4 8 8 --metadata_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --sensor_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\sensors\case_0001_sensors.npy --core_mean_std_path D:\github\Hydrogen-leak\SDIFT模型\exps\abl_mini5_k1_p2_abl_mini5_k1_p2_20260407-0847\core_mean_std.mat --basis_path D:\github\Hydrogen-leak\SDIFT模型\ckp\basis_abl_mini5_k1_p2_4x8x8_2026_04_07_084717_last.pth --model_path D:\github\Hydrogen-leak\SDIFT模型\exps\abl_mini5_k1_p2_abl_mini5_k1_p2_20260407-0847\checkpoints\ema_999.pth --mpdps_weight 0.4 --obs_rho 0.01 --missing_type 1 --num_posterior_samples 1 --total_steps 12
+RUN: D:\Anaconda\python.exe evaluate_reconstruction.py --recon_mat D:\github\Hydrogen-leak\SDIFT模型\results\abl_mini5_k1_p2_case_0001_mpdps_0.4_recon_rho0.01_mode_1.mat --truth_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test.h5 --meta D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --recon_sample_index 0 --truth_sample_index 0 --out_json D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0001_eval.json --out_csv D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0001_per_time.csv --truth_threshold 1e-05
+RUN: D:\Anaconda\python.exe make_sensor_observations.py --field_h5 D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test.h5 --metadata_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --out D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\sensors\case_0004_sensors.npy --sensor_csv D:\github\Hydrogen-leak\SDIFT模型\data\sensors_real_12.csv --sample_index 1
+RUN: D:\Anaconda\python.exe message_passing_DPS.py --dataset abl_mini5_k1_p2_case_0004 --spatial_dims 3 --img_size_3d 4 8 8 --metadata_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --sensor_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\sensors\case_0004_sensors.npy --core_mean_std_path D:\github\Hydrogen-leak\SDIFT模型\exps\abl_mini5_k1_p2_abl_mini5_k1_p2_20260407-0847\core_mean_std.mat --basis_path D:\github\Hydrogen-leak\SDIFT模型\ckp\basis_abl_mini5_k1_p2_4x8x8_2026_04_07_084717_last.pth --model_path D:\github\Hydrogen-leak\SDIFT模型\exps\abl_mini5_k1_p2_abl_mini5_k1_p2_20260407-0847\checkpoints\ema_999.pth --mpdps_weight 0.4 --obs_rho 0.01 --missing_type 1 --num_posterior_samples 1 --total_steps 12
+RUN: D:\Anaconda\python.exe evaluate_reconstruction.py --recon_mat D:\github\Hydrogen-leak\SDIFT模型\results\abl_mini5_k1_p2_case_0004_mpdps_0.4_recon_rho0.01_mode_1.mat --truth_path D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test.h5 --meta D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\data\mini5_k1_p2_meta.npy --recon_sample_index 0 --truth_sample_index 1 --out_json D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0004_eval.json --out_csv D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0004_per_time.csv --truth_threshold 1e-05
+RUN: D:\Anaconda\python.exe aggregate_reconstruction_metrics.py --manifest_csv D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\split\test_manifest.csv --out_json D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.json --out_csv D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.csv --eval_json D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0001_eval.json --eval_json D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\eval\case_0004_eval.json
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.json
+saved: D:\github\Hydrogen-leak\SDIFT模型\exps\minimal_conversion_ablation\mini5\k1_p2\eval\aggregate_metrics.csv

@@ -1,0 +1,8 @@
+{
+  "type": "linear",
+  "a": 1.0,
+  "b": 0.0,
+  "input": "source_strength",
+  "output_unit": "mL/min",
+  "note": "Fit a,b from multi-condition CFD/experiment data. Keep this as a placeholder before calibration."
+}

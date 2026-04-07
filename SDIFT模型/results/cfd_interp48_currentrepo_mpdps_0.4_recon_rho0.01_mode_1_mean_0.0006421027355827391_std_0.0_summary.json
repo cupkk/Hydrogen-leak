@@ -1,0 +1,69 @@
+{
+  "dataset": "cfd_interp48_currentrepo",
+  "result_name": "cfd_interp48_currentrepo_mpdps_0.4_recon_rho0.01_mode_1_mean_0.0006421027355827391_std_0.0",
+  "num_cases": 1,
+  "num_posterior_samples": 1,
+  "leak_rate_unit": "mL/min",
+  "rmse_mean": 0.0006421027355827391,
+  "rmse_std": 0.0,
+  "cases": [
+    {
+      "case_index": 0,
+      "source": {
+        "index": [
+          32.0,
+          7.0,
+          24.0
+        ],
+        "position": [
+          0.1808510571718216,
+          0.11914893984794617,
+          0.008510638028383255
+        ],
+        "strength": 0.0009474254329688847,
+        "peak": 0.001318061607889831,
+        "index_mean": [
+          32.0,
+          7.0,
+          24.0
+        ],
+        "index_ci_low": [
+          32.0,
+          7.0,
+          24.0
+        ],
+        "index_ci_high": [
+          32.0,
+          7.0,
+          24.0
+        ],
+        "position_mean": [
+          0.1808510571718216,
+          0.11914893984794617,
+          0.008510638028383255
+        ],
+        "position_ci_low": [
+          0.1808510571718216,
+          0.11914893984794617,
+          0.008510638028383255
+        ],
+        "position_ci_high": [
+          0.1808510571718216,
+          0.11914893984794617,
+          0.008510638028383255
+        ],
+        "strength_mean": 0.0009474254329688847,
+        "strength_ci_low": 0.0009474254329688847,
+        "strength_ci_high": 0.0009474254329688847,
+        "peak_mean": 0.001318061607889831,
+        "peak_ci_low": 0.001318061607889831,
+        "peak_ci_high": 0.001318061607889831,
+        "time_window": 5,
+        "radius": 1,
+        "num_posterior_samples": 1
+      },
+      "leak_rate": null,
+      "source_error": null
+    }
+  ]
+}

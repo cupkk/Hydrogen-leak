@@ -1,0 +1,15 @@
+case_id,case_name,leak_rate_ml_min,source_x_mm,source_y_mm,source_z_mm,duration_s_used,time_start_s,time_step_s,time_steps,raw_frame_count,raw_time_min_s,raw_time_max_s,mesh_signature_id,space_id,obstacle_id,vent_id,source_id
+case_000,Q100-X300-Y0-Fraction,100,300,0,0,118.0,1.0,2.0,60,240,1.0,240.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_001,Q100-X400-Y0-Fraction,100,400,0,0,118.0,1.0,2.0,60,240,1.0,240.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_002,Q1000-X300-Y0-Fraction,1000,300,0,0,118.0,1.0,2.0,60,120,1.0,120.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_003,Q1000-X400-Y0-Fraction,1000,400,0,0,118.0,1.0,2.0,60,120,1.0,120.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_004,Q200-X300-Y0-Fraction,200,300,0,0,118.0,1.0,2.0,60,240,1.0,240.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_005,Q200-X400-Y0-Fraction,200,400,0,0,118.0,1.0,2.0,60,240,1.0,240.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_006,Q400-X300-Y0-Fraction,400,300,0,0,118.0,1.0,2.0,60,120,1.0,120.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_007,Q400-X400-Y0-Fraction,400,400,0,0,118.0,1.0,2.0,60,120,1.0,120.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_008,Q50-X300-Y0-Fraction,50,300,0,0,118.0,1.0,2.0,60,240,1.0,240.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_009,Q50-X400-Y0-Fraction,50,400,0,0,118.0,1.0,2.0,60,240,1.0,240.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_010,Q600-X300-Y0-Fraction,600,300,0,0,118.0,1.0,2.0,60,240,0.5,120.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_011,Q600-X400-Y0-Fraction,600,400,0,0,118.0,1.0,2.0,60,120,1.0,120.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0
+case_012,Q800-X300-Y0-Fraction,800,300,0,0,118.0,1.0,2.0,60,120,1.0,120.0,0,space_main,obstacle_fixed,vent_fixed,x300_y0_z0
+case_013,Q800-X400-Y0-Fraction,800,400,0,0,118.0,1.0,2.0,60,120,1.0,120.0,1,space_main,obstacle_fixed,vent_fixed,x400_y0_z0

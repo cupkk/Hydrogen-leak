@@ -1,0 +1,67 @@
+{
+  "preset": "mini5",
+  "description": "5-case default screen. Three train cases at x=300, two unseen-position tests at x=400.",
+  "holdout_position_mm": [
+    400,
+    0,
+    0
+  ],
+  "selected_cases": [
+    "Q100-X300-Y0-Fraction",
+    "Q400-X300-Y0-Fraction",
+    "Q1000-X300-Y0-Fraction",
+    "Q100-X400-Y0-Fraction",
+    "Q400-X400-Y0-Fraction"
+  ],
+  "train_cases_expected": [
+    "Q100-X300-Y0-Fraction",
+    "Q400-X300-Y0-Fraction",
+    "Q1000-X300-Y0-Fraction"
+  ],
+  "test_cases_expected": [
+    "Q100-X400-Y0-Fraction",
+    "Q400-X400-Y0-Fraction"
+  ],
+  "rationale": [
+    "only uses clean cases from the new 22-case batch",
+    "covers low, medium, and high leak rates in training",
+    "holds out a whole unseen source position",
+    "more stable than mini3 while still cheap"
+  ],
+  "configs": {
+    "k1_p2": {
+      "bins": 48,
+      "interp_k": 1,
+      "interp_power": 2.0,
+      "description": "nearest-like lower bound at fixed 48^3 grid"
+    },
+    "k8_p2": {
+      "bins": 48,
+      "interp_k": 8,
+      "interp_power": 2.0,
+      "description": "current baseline used by the main pipeline"
+    },
+    "k16_p2": {
+      "bins": 48,
+      "interp_k": 16,
+      "interp_power": 2.0,
+      "description": "smoother interpolation with more neighbors"
+    }
+  },
+  "metric_priority": [
+    "global_rmse",
+    "global_mae",
+    "global_rel_l1_active_mean",
+    "global_rel_l2",
+    "mass_mean_rel_error"
+  ],
+  "decision_rule": "Sort by global_rmse, then global_mae, then global_rel_l1_active_mean.",
+  "training": {
+    "ftm_max_iter": 400,
+    "ftm_batch_size": 16,
+    "gpsd_steps": 1000,
+    "gpsd_batch_size": 4,
+    "posterior_steps": 12,
+    "seed": 231
+  }
+}

@@ -1,0 +1,6 @@
+converted_cases=22
+output_h5=SDIFT模型/data/cfd22_extra_T120_interp48.h5
+output_meta=SDIFT模型/data/cfd22_extra_T120_interp48_meta.npy
+output_manifest=SDIFT模型/data/cfd22_extra_T120_interp48_manifest.csv
+output_report=SDIFT模型/data/cfd22_extra_T120_interp48_report.json
+output_h5_size_gb=0.8629
