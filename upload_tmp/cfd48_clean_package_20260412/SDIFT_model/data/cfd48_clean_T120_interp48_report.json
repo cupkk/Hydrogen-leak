@@ -1,0 +1,91 @@
+{
+  "source_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd56_all_T120_interp48.h5",
+  "source_manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd56_all_T120_interp48_manifest.csv",
+  "output_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48.h5",
+  "output_manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48_manifest.csv",
+  "output_meta": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48_meta.npy",
+  "kept_case_count": 48,
+  "removed_case_count": 8,
+  "removed_cases": [
+    {
+      "case_id": "case_0048",
+      "data_index": 48,
+      "raw_case_name": "6,0,100,0,400",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "400",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0049",
+      "data_index": 49,
+      "raw_case_name": "6,0,200,0,100",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0050",
+      "data_index": 50,
+      "raw_case_name": "6,0,200,0,200",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0051",
+      "data_index": 51,
+      "raw_case_name": "6,0,200,0,50",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "50",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0052",
+      "data_index": 52,
+      "raw_case_name": "6,0,200,0,400",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "400",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0053",
+      "data_index": 53,
+      "raw_case_name": "6,0,200,0,600",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "600",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0054",
+      "data_index": 54,
+      "raw_case_name": "6,0,200,0,1000",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "1000",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    },
+    {
+      "case_id": "case_0055",
+      "data_index": 55,
+      "raw_case_name": "6,0,200,0,800",
+      "source_x_mm": "200",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "800",
+      "reason": "raw molef-h2 is constant 1.0 at sampled frames; converted tensor is near-constant 1.0"
+    }
+  ]
+}

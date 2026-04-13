@@ -1,0 +1,69 @@
+{
+  "dataset": "abl_mini5_k8_p2_case_0001",
+  "result_name": "abl_mini5_k8_p2_case_0001_mpdps_0.4_recon_rho0.01_mode_1",
+  "num_cases": 1,
+  "num_posterior_samples": 1,
+  "leak_rate_unit": "mL/min",
+  "rmse_mean": null,
+  "rmse_std": null,
+  "cases": [
+    {
+      "case_index": 0,
+      "source": {
+        "index": [
+          47.0,
+          13.0,
+          35.0
+        ],
+        "position": [
+          0.5,
+          0.22127659618854523,
+          0.19574467837810516
+        ],
+        "strength": 0.006987270433455706,
+        "peak": 0.01429823599755764,
+        "index_mean": [
+          47.0,
+          13.0,
+          35.0
+        ],
+        "index_ci_low": [
+          47.0,
+          13.0,
+          35.0
+        ],
+        "index_ci_high": [
+          47.0,
+          13.0,
+          35.0
+        ],
+        "position_mean": [
+          0.5,
+          0.22127659618854523,
+          0.19574467837810516
+        ],
+        "position_ci_low": [
+          0.5,
+          0.22127659618854523,
+          0.19574467837810516
+        ],
+        "position_ci_high": [
+          0.5,
+          0.22127659618854523,
+          0.19574467837810516
+        ],
+        "strength_mean": 0.006987270433455706,
+        "strength_ci_low": 0.006987270433455706,
+        "strength_ci_high": 0.006987270433455706,
+        "peak_mean": 0.01429823599755764,
+        "peak_ci_low": 0.01429823599755764,
+        "peak_ci_high": 0.01429823599755764,
+        "time_window": 5,
+        "radius": 1,
+        "num_posterior_samples": 1
+      },
+      "leak_rate": null,
+      "source_error": null
+    }
+  ]
+}

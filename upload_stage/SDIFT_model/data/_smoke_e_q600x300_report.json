@@ -1,0 +1,37 @@
+{
+  "scan_roots": [
+    "E:\\氢泄漏"
+  ],
+  "case_count_discovered": 1,
+  "case_count_converted": 1,
+  "skipped_cases": [],
+  "repaired_cases": [],
+  "selected_steps": 4,
+  "bins": 16,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "SDIFT模型/data/_smoke_e_q600x300.h5",
+  "output_meta": "SDIFT模型/data/_smoke_e_q600x300_meta.npy",
+  "output_manifest": "SDIFT模型/data/_smoke_e_q600x300_manifest.csv",
+  "output_report": "SDIFT模型/data/_smoke_e_q600x300_report.json",
+  "output_h5_size_gb": 0.0001,
+  "output_meta_size_mb": 0.0168,
+  "raw_selected_total_gb": 1.8264,
+  "estimated_float32_uncompressed_gb": 0.0001,
+  "conversion_wall_time_sec": 27.42
+}

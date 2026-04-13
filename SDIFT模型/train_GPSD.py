@@ -2,6 +2,7 @@ import argparse
 import os
 join = os.path.join
 import torch
+import numpy as np
 from tqdm import tqdm
 import copy
 import random
@@ -9,6 +10,8 @@ import logging
 from datetime import datetime
 import matplotlib.pyplot as plt
 import scipy.io as sio
+from torch.utils.data import WeightedRandomSampler
+from sample_weight_utils import load_manifest_rows, compute_sample_weights_from_manifest
 from networks_edm import Spatial_temporal_UNet, Spatial_temporal_UNet3D
 import scipy.io as scio
 extensions = ['*.jpg', '*.jpeg', '*.JPEG', '*.png', '*.bmp']
@@ -232,10 +235,28 @@ def load_train_data(config):
         t = (torch.linspace(0, 1, core.shape[1]).view(1, -1, 1).to(device)).repeat(core.shape[0], 1, 1) #core.shape[0], core.shape[1], 1
 
         data_set = torch.utils.data.TensorDataset(core, t)
-        train_loader = torch.utils.data.DataLoader(data_set,
-                                                    batch_size=config.train_batch_size,
-                                                    shuffle=True,
-                                                    num_workers=0)
+        sampler = None
+        if config.manifest_path and config.sample_weight_mode != "none":
+            manifest_rows = load_manifest_rows(config.manifest_path)
+            if len(manifest_rows) != core.shape[0]:
+                raise ValueError(
+                    f"manifest length {len(manifest_rows)} does not match core samples {core.shape[0]}"
+                )
+            sample_weights = compute_sample_weights_from_manifest(manifest_rows, mode=config.sample_weight_mode)
+            sampler = WeightedRandomSampler(
+                weights=torch.as_tensor(sample_weights, dtype=torch.double),
+                num_samples=len(sample_weights),
+                replacement=True,
+            )
+            logger.info(f'sample_weight_mode={config.sample_weight_mode}; sample_weights_mean={float(np.mean(sample_weights)):.6f}')
+            print("sample_weight_mode:", config.sample_weight_mode, "weights_mean:", float(np.mean(sample_weights)))
+        train_loader = torch.utils.data.DataLoader(
+            data_set,
+            batch_size=config.train_batch_size,
+            shuffle=(sampler is None),
+            sampler=sampler,
+            num_workers=0,
+        )
         logger.info(f'length of training loader: {len(train_loader)}')
         return train_loader,  core_mean, core_std
 
@@ -244,6 +265,14 @@ if __name__ == "__main__":
     parser.add_argument("--expr", type=str, default="gp-edm")
     parser.add_argument("--dataset", type=str, default="am")
     parser.add_argument("--core_path", type=str, default="./data/core3_am_2D_1x48x48_2025_04_28_16.mat")
+    parser.add_argument("--manifest_path", type=str, default="", help="Optional manifest CSV aligned with core_path for sample weighting.")
+    parser.add_argument(
+        "--sample_weight_mode",
+        type=str,
+        default="none",
+        choices=["none", "balanced_by_rate", "lowflow_focus_v1", "lowflow_balanced_v1"],
+        help="Optional case-level weighting strategy during training.",
+    )
     parser.add_argument("--spatial_dims", type=int, default=2, choices=[2, 3])
     parser.add_argument("--img_size_3d", type=int, nargs=3, default=None, help="D H W for 3D mode")
     parser.add_argument('--seed', default=231, type=int, help='global seed')

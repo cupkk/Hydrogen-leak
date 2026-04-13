@@ -1,0 +1,143 @@
+﻿# 2026-04-12 数据质量排查记录
+
+## 问题背景
+
+在分析 56-case 训练结果时，`case_0049` 在未见泄漏率实验中表现为极端异常。进一步检查发现，异常不是模型预测误差，而是该 case 的真值张量本身异常。
+
+## 已确认的异常样本
+
+对 `SDIFT模型/data/cfd56_all_T120_interp48.h5` 做逐 case 数值统计后，确认以下 8 个 case 的转换后张量几乎全为 1：
+
+| 原 case_id | 工况 | 泄漏源位置/mm | 泄漏率/(mL/min) | 异常表现 |
+| --- | --- | --- | ---: | --- |
+| case_0048 | `6,0,100,0,400` | `(100, 0, 0)` | 400 | 全场约等于 1 |
+| case_0049 | `6,0,200,0,100` | `(200, 0, 0)` | 100 | 全场约等于 1 |
+| case_0050 | `6,0,200,0,200` | `(200, 0, 0)` | 200 | 全场约等于 1 |
+| case_0051 | `6,0,200,0,50` | `(200, 0, 0)` | 50 | 全场约等于 1 |
+| case_0052 | `6,0,200,0,400` | `(200, 0, 0)` | 400 | 全场约等于 1 |
+| case_0053 | `6,0,200,0,600` | `(200, 0, 0)` | 600 | 全场约等于 1 |
+| case_0054 | `6,0,200,0,1000` | `(200, 0, 0)` | 1000 | 全场约等于 1 |
+| case_0055 | `6,0,200,0,800` | `(200, 0, 0)` | 800 | 全场约等于 1 |
+
+转换后统计特征为：
+
+- `min ≈ 0.99999988`
+- `max ≈ 1.00000012`
+- `mean = 1.0`
+- `std ≈ 1e-8`
+
+正常 case 的均值通常在 `1e-4` 到 `1e-3` 量级，并且具有明显空间变化，因此上述 8 个样本不能作为有效浓度场使用。
+
+## 原始文件核查结论
+
+已读取 `E:\AI反演_CFD计算` 中对应原始 ASCII 文件。表头显示第 5 列为 `molef-h2`，转换脚本读取的列没有错。问题在于上述异常工况的原始 `molef-h2` 列本身就是常数 1。
+
+抽查结果：
+
+| 工况 | 抽查时刻 | 原始 molef-h2 统计 |
+| --- | --- | --- |
+| `6,0,100,0,400` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,100` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,200` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,50` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,400` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,600` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,800` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+| `6,0,200,0,1000` | 1 s / 60 s / 120 s | `min=max=mean=1.0, std=0` |
+
+作为对照，`6,0,100,0,100`、`6,0,100,0,200`、`6,0,100,0,50` 的原始 `molef-h2` 列均具有正常变化，不是常数 1。
+
+因此，这 8 个样本不是转换参数问题，重转不能修复；需要重新导出/重跑 CFD，或者在当前阶段剔除。
+
+## 已完成的修复
+
+已新增 HDF5 质量检查脚本：
+
+- `SDIFT模型/validate_hdf5_quality.py`
+
+该脚本会逐 case 检查 `min/max/mean/std/sum/finite_ratio`，并标记以下异常：
+
+- 近似常数场
+- 均值异常偏高
+- 非有限值
+- 近零场
+
+已生成报告：
+
+- `docs/cfd56_quality_report.csv`
+- `docs/cfd56_quality_report.json`
+- `docs/cfd48_clean_quality_report.csv`
+- `docs/cfd48_clean_quality_report.json`
+
+已从 56-case 数据集中剔除上述 8 个无效样本，生成 clean 数据集：
+
+- `SDIFT模型/data/cfd48_clean_T120_interp48.h5`
+- `SDIFT模型/data/cfd48_clean_T120_interp48_manifest.csv`
+- `SDIFT模型/data/cfd48_clean_T120_interp48_meta.npy`
+- `SDIFT模型/data/cfd48_clean_T120_interp48_report.json`
+
+clean 数据集已通过质量检查：
+
+- `case_count = 48`
+- `flagged_count = 0`
+
+## clean 数据集划分
+
+已生成 clean 版未见位置划分：
+
+- `SDIFT模型/data/splits_clean/holdout_400_0_0_val_300_0_0/`
+- test 位置：`(400, 0, 0)`，7 组
+- val 位置：`(300, 0, 0)`，7 组
+- train：34 组
+
+已生成 clean 版未见泄漏率划分：
+
+- `SDIFT模型/data/splits_clean/holdout_rate_0100_val_0200/`
+- test 泄漏率：`100 mL/min`，7 组
+- val 泄漏率：`200 mL/min`，7 组
+- train：34 组
+
+## 服务器同步状态
+
+已将 clean 数据包上传至恒源云个人数据：
+
+- `oss://gpucloud-data-user-prod/b8f000215c42/Hydrogen-leak/cfd48_clean_package_20260412.tar.gz`
+
+已在服务器 `/hy-tmp/SDIFT_model56` 完成下载、解压、质检和 split 重建。服务器端关键路径如下：
+
+- `/hy-tmp/SDIFT_model56/data/cfd48_clean_T120_interp48.h5`
+- `/hy-tmp/SDIFT_model56/data/cfd48_clean_T120_interp48_manifest.csv`
+- `/hy-tmp/SDIFT_model56/data/cfd48_clean_T120_interp48_meta.npy`
+- `/hy-tmp/SDIFT_model56/data/splits_clean/holdout_400_0_0_val_300_0_0/`
+- `/hy-tmp/SDIFT_model56/data/splits_clean/holdout_rate_0100_val_0200/`
+- `/hy-tmp/SDIFT_model56/data/splits_clean/train_size_repeated_holdout400_val300_clean48/`
+
+服务器端质检结果：
+
+- 主 clean HDF5 形状：`(48, 120, 48, 48, 48)`
+- `flagged_count = 0`
+- position holdout split：train `(34, 120, 48, 48, 48)`，val `(7, 120, 48, 48, 48)`，test `(7, 120, 48, 48, 48)`
+- rate holdout split：train `(34, 120, 48, 48, 48)`，val `(7, 120, 48, 48, 48)`，test `(7, 120, 48, 48, 48)`
+- train-size repeated subsets：`6/12/24/31`，每个规模 3 次重复
+
+服务器端日志目录：
+
+- `/hy-tmp/cfd48_clean_setup_logs/`
+
+## 对既有实验结论的影响
+
+可以保留的部分：
+
+- 已完成的 `holdout_400` 测试集本身不含无效 case，因此“CFD 真值到传感器抽样再到全场反演对比”的闭环仍有参考价值。
+- `lowflow_focus_v1 + n=6` 的高精度复评使用的子集未包含无效 case，可以作为阶段性可用结果。
+- 源参数模型短期仍建议使用 `sensor` 回归器作为主基线。
+
+必须重做或降级表述的部分：
+
+- 未见泄漏率实验原 test 中包含 `case_0049`，必须基于 clean split 重做。
+- 训练数据量实验中部分 `n=24` 和全部 `n=42` 子集包含无效样本，因此“训练数据量增加未带来单调收益”的结论必须暂时降级为“含异常数据版本中的观察现象”，不能作为最终科研结论。
+- 原 56-case 数据集不能再作为正式训练数据使用，应改用 `cfd48_clean`，或者等待 CFD 重新导出后再补回 8 个样本。
+
+## 建议给导师的表述
+
+当前已发现新增 CFD 数据中有 8 组原始浓度列异常为常数 1，已完成数据质检、异常样本定位和 clean 数据集重建。短期汇报建议使用 clean 数据集结果，并明确说明异常样本已被剔除，不纳入模型训练和评价。后续若要恢复 56 组规模，需要重新导出或重算这 8 组 CFD。

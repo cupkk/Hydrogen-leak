@@ -1,0 +1,38 @@
+{
+  "scan_roots": [
+    "E:\\氢泄漏",
+    "F:\\氢泄露"
+  ],
+  "case_count_discovered": 5,
+  "case_count_converted": 5,
+  "skipped_cases": [],
+  "repaired_cases": [],
+  "selected_steps": 120,
+  "bins": 48,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\data\\mini5_k8_p2.h5",
+  "output_meta": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\data\\mini5_k8_p2_meta.npy",
+  "output_manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\data\\mini5_k8_p2_manifest.csv",
+  "output_report": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\data\\mini5_k8_p2_report.json",
+  "output_h5_size_gb": 0.1927,
+  "output_meta_size_mb": 12.6591,
+  "raw_selected_total_gb": 275.0071,
+  "estimated_float32_uncompressed_gb": 0.2472,
+  "conversion_wall_time_sec": 4181.41
+}

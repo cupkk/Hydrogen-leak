@@ -84,10 +84,19 @@ def mean_std(values):
     return mean, var ** 0.5
 
 
+def summarize_metric_block(rows, keys):
+    block = {}
+    for key in keys:
+        mean, std = mean_std([row[key] for row in rows])
+        block[key] = {"mean": mean, "std": std}
+    return block
+
+
 def main():
     parser = argparse.ArgumentParser(description="Aggregate per-case reconstruction evaluation JSON files.")
     parser.add_argument("--eval_json", action="append", required=True, help="Evaluation JSON path or glob. Can be provided multiple times.")
     parser.add_argument("--manifest_csv", default="")
+    parser.add_argument("--low_rates", type=float, nargs="*", default=[50.0, 100.0])
     parser.add_argument("--out_json", required=True)
     parser.add_argument("--out_csv", required=True)
     args = parser.parse_args()
@@ -109,16 +118,39 @@ def main():
         "metrics": {},
         "rows": rows,
     }
-    for key in [
+    metric_keys = [
         "global_rmse",
         "global_mae",
         "global_rel_l1_mean",
         "global_rel_l1_active_mean",
         "global_rel_l2",
         "mass_mean_rel_error",
-    ]:
-        mean, std = mean_std([row[key] for row in rows])
-        summary["metrics"][key] = {"mean": mean, "std": std}
+    ]
+    summary["metrics"] = summarize_metric_block(rows, metric_keys)
+
+    low_rates = {float(x) for x in args.low_rates}
+    subgroups = {}
+    low_rows = [row for row in rows if row.get("leak_rate_ml_min", "") != "" and float(row["leak_rate_ml_min"]) in low_rates]
+    if low_rows:
+        subgroup_name = "low_rates_" + "_".join(str(int(x)) if float(x).is_integer() else str(x) for x in sorted(low_rates))
+        subgroups[subgroup_name] = {
+            "count": len(low_rows),
+            "rates": sorted(low_rates),
+            "metrics": summarize_metric_block(low_rows, metric_keys),
+        }
+    rate_groups = {}
+    for row in rows:
+        value = row.get("leak_rate_ml_min", "")
+        if value == "":
+            continue
+        rate_groups.setdefault(float(value), []).append(row)
+    for rate, rate_rows in sorted(rate_groups.items()):
+        subgroups[f"rate_{int(rate) if float(rate).is_integer() else rate}"] = {
+            "count": len(rate_rows),
+            "rates": [rate],
+            "metrics": summarize_metric_block(rate_rows, metric_keys),
+        }
+    summary["subgroups"] = subgroups
 
     os.makedirs(os.path.dirname(args.out_json) or ".", exist_ok=True)
     os.makedirs(os.path.dirname(args.out_csv) or ".", exist_ok=True)

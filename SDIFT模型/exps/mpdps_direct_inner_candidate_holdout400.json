@@ -1,0 +1,12 @@
+{
+  "description": "Candidate observation-injection configuration after diagnosing that posterior observation updates are too weak. Use for the next server-side diagnostic run before re-running sensor-count or train-size studies.",
+  "base_reference": "mpdps_best_absolute_holdout400_stage2.json",
+  "obs_injection_mode": "direct_inner",
+  "obs_scale_schedule": "constant",
+  "obs_scale_blend": "replace",
+  "obs_target_ratio": 0.25,
+  "obs_min_scale": 0.0,
+  "obs_max_scale": 500.0,
+  "obs_inner_steps": 3,
+  "obs_inner_decay": 0.7
+}

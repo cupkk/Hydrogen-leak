@@ -1,0 +1,23 @@
+{
+  "part_h5": [
+    "data\\cfd16_part1.h5",
+    "data\\cfd16_part2.h5",
+    "data\\cfd16_part3.h5"
+  ],
+  "part_manifest": [
+    "data\\cfd16_part1_manifest.csv",
+    "data\\cfd16_part2_manifest.csv",
+    "data\\cfd16_part3_manifest.csv"
+  ],
+  "meta_template": "data\\cfd16_part1_meta.npy",
+  "merged_case_count": 16,
+  "shape": [
+    16,
+    120,
+    48,
+    48,
+    48
+  ],
+  "out_h5_size_gb": 0.6367,
+  "out_meta_size_mb": 12.6591
+}

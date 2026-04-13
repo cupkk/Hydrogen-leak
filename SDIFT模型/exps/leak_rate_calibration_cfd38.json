@@ -1,0 +1,32 @@
+{
+  "type": "linear_features",
+  "feature_names": [
+    "mass_slope_early",
+    "source_strength"
+  ],
+  "coef": [
+    56345413.989348836,
+    -1265.239925071597
+  ],
+  "intercept": 3.097206525519797,
+  "output_unit": "mL/min",
+  "fit_metrics": {
+    "rmse": 7.907483646850187,
+    "mae": 3.3419099567751887,
+    "mean_rel_error": 0.03282658268811289,
+    "max_rel_error": 0.8150906399768462,
+    "r2": 0.9994591823316764
+  },
+  "source_position_metrics": {
+    "mean_l2_error_mm": 3.6863580658156887,
+    "median_l2_error_mm": 3.7544516295923023,
+    "max_l2_error_mm": 4.666657613009938
+  },
+  "estimation_config": {
+    "time_window": 5,
+    "radius": 2,
+    "source_abs_threshold": 1e-06,
+    "source_rel_threshold": 0.1
+  },
+  "note": "Calibration was fit on available CFD fields. Use this as a baseline calibration model for reconstructed-field leak-rate estimation, and validate on held-out conditions before claiming final performance."
+}

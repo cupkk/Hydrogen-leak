@@ -1,0 +1,18 @@
+{
+  "sensor_counts": [
+    6
+  ],
+  "observed_time_steps": [
+    20
+  ],
+  "rows": [
+    {
+      "condition": "s06_t020",
+      "sensor_count": 6,
+      "observed_time_steps": 20,
+      "sensor_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\results\\_dryrun_sensor56\\sensor_subsets\\sensor_subset_6.csv",
+      "output_dir": "D:\\github\\Hydrogen-leak\\SDIFT模型\\results\\_dryrun_sensor56\\s06_t020",
+      "wall_seconds": 0.0
+    }
+  ]
+}

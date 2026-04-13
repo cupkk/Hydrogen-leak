@@ -1,0 +1,21 @@
+{
+  "part_h5": [
+    "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd16_all_T120_interp48.h5",
+    "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd22_extra_T120_interp48.h5"
+  ],
+  "part_manifest": [
+    "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd16_all_T120_interp48_manifest.csv",
+    "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd22_extra_T120_interp48_manifest.csv"
+  ],
+  "meta_template": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd16_all_T120_interp48_meta.npy",
+  "merged_case_count": 38,
+  "shape": [
+    38,
+    120,
+    48,
+    48,
+    48
+  ],
+  "out_h5_size_gb": 1.4996,
+  "out_meta_size_mb": 12.6591
+}

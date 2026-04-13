@@ -1,0 +1,44 @@
+2026-04-07 10:25:28 INFO --> #################### Arguments: ####################
+2026-04-07 10:25:28 INFO --> 	expr: abl_mini5_k8_p2_abl_mini5_k8_p2
+2026-04-07 10:25:28 INFO --> 	dataset: abl_mini5_k8_p2
+2026-04-07 10:25:28 INFO --> 	core_path: D:\github\Hydrogen-leak\SDIFTÄ£ĞÍ\data\core_abl_mini5_k8_p2_4x8x8_2026_04_07_102522_last.mat
+2026-04-07 10:25:28 INFO --> 	spatial_dims: 3
+2026-04-07 10:25:28 INFO --> 	img_size_3d: [4, 8, 8]
+2026-04-07 10:25:28 INFO --> 	seed: 231
+2026-04-07 10:25:28 INFO --> 	train_batch_size: 4
+2026-04-07 10:25:28 INFO --> 	num_steps: 1000
+2026-04-07 10:25:28 INFO --> 	learning_rate: 0.0002
+2026-04-07 10:25:28 INFO --> 	accumulation_steps: 2
+2026-04-07 10:25:28 INFO --> 	save_model_iters: 200
+2026-04-07 10:25:28 INFO --> 	log_step: 500
+2026-04-07 10:25:28 INFO --> 	train_dataset: True
+2026-04-07 10:25:28 INFO --> 	desired_class: all
+2026-04-07 10:25:28 INFO --> 	train_progress_bar: True
+2026-04-07 10:25:28 INFO --> 	warmup: 5000
+2026-04-07 10:25:28 INFO --> 	gt_guide_type: l2
+2026-04-07 10:25:28 INFO --> 	sigma_min: 0.002
+2026-04-07 10:25:28 INFO --> 	sigma_max: 80.0
+2026-04-07 10:25:28 INFO --> 	rho: 7.0
+2026-04-07 10:25:28 INFO --> 	sigma_data: 0.5
+2026-04-07 10:25:28 INFO --> 	total_steps: 20
+2026-04-07 10:25:28 INFO --> 	save_signals_step: 0
+2026-04-07 10:25:28 INFO --> 	eval_batch_size: 64
+2026-04-07 10:25:28 INFO --> 	begin_ckpt: 0
+2026-04-07 10:25:28 INFO --> 	img_size: 48
+2026-04-07 10:25:28 INFO --> 	channels: 1
+2026-04-07 10:25:28 INFO --> 	model_channels: 40
+2026-04-07 10:25:28 INFO --> 	channel_mult: [1, 2, 2]
+2026-04-07 10:25:28 INFO --> 	attn_resolutions: []
+2026-04-07 10:25:28 INFO --> 	num_layers: 4
+2026-04-07 10:25:28 INFO --> 	layers_per_block: 4
+2026-04-07 10:25:28 INFO --> 	num_temporal_latent: 8
+2026-04-07 10:25:28 INFO --> 	device: cuda:0
+2026-04-07 10:25:28 INFO --> length of training loader: 1
+2026-04-07 10:25:28 INFO --> total number of trainable parameters in the Score Model: 19201641
+2026-04-07 10:25:28 INFO --> total number of parameters in the Score Model: 19201641
+2026-04-07 10:25:28 INFO --> #################### Model: ####################
+2026-04-07 10:25:28 INFO --> number of trainable parameters of phi model in optimizer: 19201641
+2026-04-07 10:25:32 INFO --> #################### Training ####################
+2026-04-07 10:25:35 INFO --> step: 00000000, current lr: 0.000000 average loss: 0.7558951378; batch loss: 0.7558951378
+2026-04-07 10:37:01 INFO --> step: 00000500, current lr: 0.000020 average loss: 0.6320686731; batch loss: 0.4727161825
+2026-04-07 10:48:19 INFO --> step: 00000999, current lr: 0.000040 average loss: 0.4100761953; batch loss: 0.0419637077

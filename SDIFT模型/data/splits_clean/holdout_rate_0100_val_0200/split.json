@@ -1,0 +1,114 @@
+{
+  "input_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48.h5",
+  "manifest_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48_manifest.csv",
+  "dataset_key": "data",
+  "val_leak_rates_ml_min": [
+    200
+  ],
+  "test_leak_rates_ml_min": [
+    100
+  ],
+  "train": {
+    "count": 34,
+    "leak_rates": {
+      "1000": 7,
+      "400": 6,
+      "50": 7,
+      "600": 7,
+      "800": 7
+    },
+    "positions": {
+      "0,-150,0": 5,
+      "100,0,0": 4,
+      "200,-150,0": 5,
+      "200,-300,0": 5,
+      "300,0,0": 5,
+      "400,0,0": 5,
+      "0,0,0": 5
+    },
+    "case_ids": [
+      "case_0000",
+      "case_0003",
+      "case_0004",
+      "case_0005",
+      "case_0006",
+      "case_0007",
+      "case_0008",
+      "case_0009",
+      "case_0010",
+      "case_0011",
+      "case_0012",
+      "case_0013",
+      "case_0014",
+      "case_0017",
+      "case_0019",
+      "case_0020",
+      "case_0021",
+      "case_0022",
+      "case_0026",
+      "case_0027",
+      "case_0030",
+      "case_0031",
+      "case_0032",
+      "case_0033",
+      "case_0034",
+      "case_0035",
+      "case_0036",
+      "case_0037",
+      "case_0040",
+      "case_0041",
+      "case_0042",
+      "case_0043",
+      "case_0044",
+      "case_0046"
+    ]
+  },
+  "val": {
+    "count": 7,
+    "leak_rates": {
+      "200": 7
+    },
+    "positions": {
+      "0,-150,0": 1,
+      "200,-150,0": 1,
+      "200,-300,0": 1,
+      "300,0,0": 1,
+      "400,0,0": 1,
+      "0,0,0": 1,
+      "100,0,0": 1
+    },
+    "case_ids": [
+      "case_0002",
+      "case_0015",
+      "case_0018",
+      "case_0028",
+      "case_0029",
+      "case_0039",
+      "case_0047"
+    ]
+  },
+  "test": {
+    "count": 7,
+    "leak_rates": {
+      "100": 7
+    },
+    "positions": {
+      "0,-150,0": 1,
+      "200,-300,0": 1,
+      "200,-150,0": 1,
+      "300,0,0": 1,
+      "400,0,0": 1,
+      "0,0,0": 1,
+      "100,0,0": 1
+    },
+    "case_ids": [
+      "case_0001",
+      "case_0016",
+      "case_0023",
+      "case_0024",
+      "case_0025",
+      "case_0038",
+      "case_0045"
+    ]
+  }
+}

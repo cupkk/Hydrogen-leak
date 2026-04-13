@@ -1,0 +1,31 @@
+[2026-04-10 13:23:13] monitor started
+[2026-04-10 13:33:59] monitor exception: Error reading SSH protocol banner
+[2026-04-10 13:35:38] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:37:11] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:38:43] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:40:15] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:41:49] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:43:21] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:44:53] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:46:26] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:47:58] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:49:30] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:51:03] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:52:35] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:54:07] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:55:39] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:57:12] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 13:58:44] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:00:17] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:01:49] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:03:21] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:04:53] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:06:26] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:07:58] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:09:34] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:11:06] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:12:38] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:14:13] monitor exception: [Errno None] Unable to connect to port 63260 on 122.9.140.87
+[2026-04-10 14:24:48] cfd56_scale_none: relaunched on GPU 1; out=restarted err=
+[2026-04-10 14:35:11] cfd56_scale_focus: relaunched on GPU 2; out=restarted err=
+[2026-04-10 14:39:28] cfd56_scale_balanced: relaunched on GPU 0; out=restarted err=

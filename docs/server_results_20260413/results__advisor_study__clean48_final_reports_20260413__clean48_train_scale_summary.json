@@ -1,0 +1,194 @@
+{
+  "rows": [
+    {
+      "train_size": 6,
+      "repeat": 0,
+      "rmse": 0.0016077952134467863,
+      "mae": 0.0011173840068440944,
+      "active_rel_l1": 6.268055992859388,
+      "mass_rel_error": 3.290769740596503,
+      "low_rmse": 0.0013574637593338087,
+      "low_mae": 0.0009198342490048367,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n006_r00/aggregate_metrics.json"
+    },
+    {
+      "train_size": 6,
+      "repeat": 1,
+      "rmse": 0.00205490382504538,
+      "mae": 0.0009037547627170924,
+      "active_rel_l1": 4.267697952129049,
+      "mass_rel_error": 2.5840759690518174,
+      "low_rmse": 0.0020042196817496435,
+      "low_mae": 0.0008129920300900676,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n006_r01/aggregate_metrics.json"
+    },
+    {
+      "train_size": 6,
+      "repeat": 2,
+      "rmse": 0.002090758824391815,
+      "mae": 0.0010249816391376552,
+      "active_rel_l1": 6.185879521685165,
+      "mass_rel_error": 2.2006037871399866,
+      "low_rmse": 0.0020547157823324054,
+      "low_mae": 0.0009662639306191286,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n006_r02/aggregate_metrics.json"
+    },
+    {
+      "train_size": 12,
+      "repeat": 0,
+      "rmse": 0.0007600895814637449,
+      "mae": 0.0005275056595482158,
+      "active_rel_l1": 1.927756990993574,
+      "mass_rel_error": 0.952463730939685,
+      "low_rmse": 0.0004906133478379418,
+      "low_mae": 0.00028305490099937334,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n012_r00/aggregate_metrics.json"
+    },
+    {
+      "train_size": 12,
+      "repeat": 1,
+      "rmse": 0.0006711420901721827,
+      "mae": 0.00042400078155596774,
+      "active_rel_l1": 1.278395372679887,
+      "mass_rel_error": 0.9132664363371905,
+      "low_rmse": 0.00048056600132032436,
+      "low_mae": 0.00026816209480232724,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n012_r01/aggregate_metrics.json"
+    },
+    {
+      "train_size": 12,
+      "repeat": 2,
+      "rmse": 0.0007771320299171397,
+      "mae": 0.0004367983896974535,
+      "active_rel_l1": 1.8850423221458252,
+      "mass_rel_error": 0.7845052614659843,
+      "low_rmse": 0.00054114924395158,
+      "low_mae": 0.00027801179753531046,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n012_r02/aggregate_metrics.json"
+    },
+    {
+      "train_size": 24,
+      "repeat": 0,
+      "rmse": 0.0008430793230817729,
+      "mae": 0.00040558216583088454,
+      "active_rel_l1": 1.314086657262474,
+      "mass_rel_error": 1.1605925158547745,
+      "low_rmse": 0.0006269273732179913,
+      "low_mae": 0.0003347353651782229,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n024_r00/aggregate_metrics.json"
+    },
+    {
+      "train_size": 24,
+      "repeat": 1,
+      "rmse": 0.006331117433057913,
+      "mae": 0.0027416194100751087,
+      "active_rel_l1": 16.211017399047517,
+      "mass_rel_error": 8.514258516087029,
+      "low_rmse": 0.006257027466037611,
+      "low_mae": 0.002470412911991885,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n024_r01/aggregate_metrics.json"
+    },
+    {
+      "train_size": 24,
+      "repeat": 2,
+      "rmse": 0.0007996312291152325,
+      "mae": 0.00048817439635657323,
+      "active_rel_l1": 1.5275202842555866,
+      "mass_rel_error": 0.8001592578270548,
+      "low_rmse": 0.0004649275652839304,
+      "low_mae": 0.00025560282324102533,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n024_r02/aggregate_metrics.json"
+    },
+    {
+      "train_size": 31,
+      "repeat": 0,
+      "rmse": 0.000743743704742313,
+      "mae": 0.0004500897943317918,
+      "active_rel_l1": 1.4847994774472966,
+      "mass_rel_error": 1.1143810235968354,
+      "low_rmse": 0.0003952467410242547,
+      "low_mae": 0.00020930025504698515,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n031_r00/aggregate_metrics.json"
+    },
+    {
+      "train_size": 31,
+      "repeat": 1,
+      "rmse": 0.0019477380809408095,
+      "mae": 0.0007062940494698061,
+      "active_rel_l1": 1.8329462750183225,
+      "mass_rel_error": 1.0818300610472822,
+      "low_rmse": 0.0010802621422252448,
+      "low_mae": 0.0002401362825772761,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n031_r01/aggregate_metrics.json"
+    },
+    {
+      "train_size": 31,
+      "repeat": 2,
+      "rmse": 0.0008482477409936872,
+      "mae": 0.0005956650673252807,
+      "active_rel_l1": 1.2716624196974027,
+      "mass_rel_error": 1.0816273108103303,
+      "low_rmse": 0.00031908581684555976,
+      "low_mae": 0.00015666387055451143,
+      "path": "/hy-tmp/SDIFT_model56/results/advisor_study/train_scale_lowflow_focus_clean48_20260413/lowflow_focus_v1_n031_r02/aggregate_metrics.json"
+    }
+  ],
+  "summary": [
+    {
+      "train_size": 6,
+      "completed_repeats": 3,
+      "rmse_mean": 0.0019178192876279938,
+      "rmse_std": 0.00021970827654486052,
+      "mae_mean": 0.0010153734695662808,
+      "mae_std": 8.747800172406308e-05,
+      "active_rel_l1_mean": 5.573877822224534,
+      "active_rel_l1_std": 0.9242177351272647,
+      "mass_rel_error_mean": 2.6918164989294358,
+      "mass_rel_error_std": 0.45153181346218285,
+      "low_rmse_mean": 0.0018054664078052858,
+      "low_rmse_std": 0.0003174557647102029
+    },
+    {
+      "train_size": 12,
+      "completed_repeats": 3,
+      "rmse_mean": 0.0007361212338510225,
+      "rmse_std": 4.6470980889497976e-05,
+      "mae_mean": 0.000462768276933879,
+      "mae_std": 4.60734285270229e-05,
+      "active_rel_l1_mean": 1.6970648952730951,
+      "active_rel_l1_std": 0.29655720369490496,
+      "mass_rel_error_mean": 0.8834118095809532,
+      "mass_rel_error_std": 0.07174485310716341,
+      "low_rmse_mean": 0.0005041095310366154,
+      "low_rmse_std": 2.6510281560538172e-05
+    },
+    {
+      "train_size": 24,
+      "completed_repeats": 3,
+      "rmse_mean": 0.0026579426617516395,
+      "rmse_std": 0.002597387355226787,
+      "mae_mean": 0.0012117919907541888,
+      "mae_std": 0.0010822767110172215,
+      "active_rel_l1_mean": 6.350874780188526,
+      "active_rel_l1_std": 6.972718160873488,
+      "mass_rel_error_mean": 3.4916700965896195,
+      "mass_rel_error_std": 3.5545533106261735,
+      "low_rmse_mean": 0.0024496274681798445,
+      "low_rmse_std": 0.002693050567938171
+    },
+    {
+      "train_size": 31,
+      "completed_repeats": 3,
+      "rmse_mean": 0.0011799098422256033,
+      "rmse_std": 0.0005446102132256788,
+      "mae_mean": 0.0005840163037089595,
+      "mae_std": 0.00010491877924708514,
+      "active_rel_l1_mean": 1.5298027240543408,
+      "active_rel_l1_std": 0.23134225830265662,
+      "mass_rel_error_mean": 1.092612798484816,
+      "mass_rel_error_std": 0.015392682142505523,
+      "low_rmse_mean": 0.0005981982333650198,
+      "low_rmse_std": 0.00034228577802974106
+    }
+  ]
+}

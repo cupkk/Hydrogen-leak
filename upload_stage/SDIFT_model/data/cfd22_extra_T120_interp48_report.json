@@ -1,0 +1,225 @@
+{
+  "scan_roots": [
+    "E:\\氢泄漏",
+    "F:\\氢泄露"
+  ],
+  "case_count_discovered": 22,
+  "case_count_converted": 22,
+  "skipped_cases": [],
+  "repaired_cases": [
+    {
+      "case_name": "6,200,-300,100",
+      "case_id": "case_0000",
+      "repaired_frames": [
+        {
+          "t_idx": 17,
+          "time": 18.0,
+          "file": "F:\\氢泄露\\6,200,-300,100\\all\\100mlpmin-18.0",
+          "reason": "could not convert string '4\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x to float32 at row 3591371, column 5.",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 19.0
+        },
+        {
+          "t_idx": 25,
+          "time": 26.0,
+          "file": "F:\\氢泄露\\6,200,-300,100\\all\\100mlpmin-26.0",
+          "reason": "invalid column index 4 at row 5111808 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 25.0,
+          "source_right_time": 27.0
+        },
+        {
+          "t_idx": 27,
+          "time": 28.0,
+          "file": "F:\\氢泄露\\6,200,-300,100\\all\\100mlpmin-28.0",
+          "reason": "invalid column index 4 at row 4849664 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 27.0,
+          "source_right_time": 30.0
+        },
+        {
+          "t_idx": 28,
+          "time": 29.0,
+          "file": "F:\\氢泄露\\6,200,-300,100\\all\\100mlpmin-29.0",
+          "reason": "invalid column index 4 at row 1703935 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 27.0,
+          "source_right_time": 30.0
+        }
+      ]
+    },
+    {
+      "case_name": "6,200,-300,200",
+      "case_id": "case_0002",
+      "repaired_frames": [
+        {
+          "t_idx": 17,
+          "time": 18.0,
+          "file": "F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-18.0",
+          "reason": "Value length mismatch in F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-18.0: 4631421 vs 5155709",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 23.0
+        },
+        {
+          "t_idx": 18,
+          "time": 19.0,
+          "file": "F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-19.0",
+          "reason": "invalid column index 4 at row 1127219 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 23.0
+        },
+        {
+          "t_idx": 19,
+          "time": 20.0,
+          "file": "F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-20.0",
+          "reason": "invalid column index 4 at row 340787 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 23.0
+        },
+        {
+          "t_idx": 20,
+          "time": 21.0,
+          "file": "F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-21.0",
+          "reason": "invalid column index 4 at row 209715 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 23.0
+        },
+        {
+          "t_idx": 21,
+          "time": 22.0,
+          "file": "F:\\氢泄露\\6,200,-300,200\\all\\200mlpmin-22.0",
+          "reason": "invalid column index 4 at row 26215 with 2 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 17.0,
+          "source_right_time": 23.0
+        }
+      ]
+    },
+    {
+      "case_name": "6,200,-300,800",
+      "case_id": "case_0006",
+      "repaired_frames": [
+        {
+          "t_idx": 51,
+          "time": 52.0,
+          "file": "F:\\氢泄露\\6,200,-300,800\\all\\800mlpmin-52.0",
+          "reason": "could not convert string '1\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x to float32 at row 2542795, column 5.",
+          "repair_mode": "linear_interp",
+          "source_left_time": 51.0,
+          "source_right_time": 56.0
+        },
+        {
+          "t_idx": 52,
+          "time": 53.0,
+          "file": "F:\\氢泄露\\6,200,-300,800\\all\\800mlpmin-53.0",
+          "reason": "invalid column index 4 at row 2883584 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 51.0,
+          "source_right_time": 56.0
+        },
+        {
+          "t_idx": 53,
+          "time": 54.0,
+          "file": "F:\\氢泄露\\6,200,-300,800\\all\\800mlpmin-54.0",
+          "reason": "invalid column index 4 at row 2385510 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 51.0,
+          "source_right_time": 56.0
+        },
+        {
+          "t_idx": 54,
+          "time": 55.0,
+          "file": "F:\\氢泄露\\6,200,-300,800\\all\\800mlpmin-55.0",
+          "reason": "Value length mismatch in F:\\氢泄露\\6,200,-300,800\\all\\800mlpmin-55.0: 5103280 vs 5155709",
+          "repair_mode": "linear_interp",
+          "source_left_time": 51.0,
+          "source_right_time": 56.0
+        }
+      ]
+    },
+    {
+      "case_name": "6,200.-150,100",
+      "case_id": "case_0007",
+      "repaired_frames": [
+        {
+          "t_idx": 63,
+          "time": 64.0,
+          "file": "F:\\氢泄露\\6,200.-150,100\\100mlmin,0.59ms\\all\\100mlpmin-64.0",
+          "reason": "invalid column index 4 at row 4430233 with 4 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 63.0,
+          "source_right_time": 69.0
+        },
+        {
+          "t_idx": 64,
+          "time": 65.0,
+          "file": "F:\\氢泄露\\6,200.-150,100\\100mlmin,0.59ms\\all\\100mlpmin-65.0",
+          "reason": "invalid column index 4 at row 2359296 with 4 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 63.0,
+          "source_right_time": 69.0
+        },
+        {
+          "t_idx": 65,
+          "time": 66.0,
+          "file": "F:\\氢泄露\\6,200.-150,100\\100mlmin,0.59ms\\all\\100mlpmin-66.0",
+          "reason": "invalid column index 4 at row 1179647 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 63.0,
+          "source_right_time": 69.0
+        },
+        {
+          "t_idx": 66,
+          "time": 67.0,
+          "file": "F:\\氢泄露\\6,200.-150,100\\100mlmin,0.59ms\\all\\100mlpmin-67.0",
+          "reason": "invalid column index 4 at row 1127219 with 2 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 63.0,
+          "source_right_time": 69.0
+        },
+        {
+          "t_idx": 67,
+          "time": 68.0,
+          "file": "F:\\氢泄露\\6,200.-150,100\\100mlmin,0.59ms\\all\\100mlpmin-68.0",
+          "reason": "invalid column index 4 at row 157286 with 3 columns",
+          "repair_mode": "linear_interp",
+          "source_left_time": 63.0,
+          "source_right_time": 69.0
+        }
+      ]
+    }
+  ],
+  "selected_steps": 120,
+  "bins": 48,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "SDIFT模型/data/cfd22_extra_T120_interp48.h5",
+  "output_meta": "SDIFT模型/data/cfd22_extra_T120_interp48_meta.npy",
+  "output_manifest": "SDIFT模型/data/cfd22_extra_T120_interp48_manifest.csv",
+  "output_report": "SDIFT模型/data/cfd22_extra_T120_interp48_report.json",
+  "output_h5_size_gb": 0.8629,
+  "output_meta_size_mb": 12.6591,
+  "raw_selected_total_gb": 1139.3913,
+  "estimated_float32_uncompressed_gb": 1.0876,
+  "conversion_wall_time_sec": 15127.39
+}

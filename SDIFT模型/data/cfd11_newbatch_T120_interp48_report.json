@@ -1,0 +1,25 @@
+{
+  "part_h5": [
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b1.h5",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b2.h5",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b3.h5",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b4.h5"
+  ],
+  "part_manifest": [
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b1_manifest.csv",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b2_manifest.csv",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b3_manifest.csv",
+    "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b4_manifest.csv"
+  ],
+  "meta_template": "d:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd11_newbatch_b1_meta.npy",
+  "merged_case_count": 11,
+  "shape": [
+    11,
+    120,
+    48,
+    48,
+    48
+  ],
+  "out_h5_size_gb": 0.3769,
+  "out_meta_size_mb": 12.6591
+}

@@ -1,0 +1,13 @@
+{
+  "h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48.h5",
+  "manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd48_clean_T120_interp48_manifest.csv",
+  "case_count": 48,
+  "flagged_count": 0,
+  "flagged_cases": [],
+  "thresholds": {
+    "constant_std_threshold": 1e-07,
+    "high_mean_threshold": 0.05,
+    "high_max_threshold": 1.5,
+    "near_zero_max_threshold": 1e-12
+  }
+}

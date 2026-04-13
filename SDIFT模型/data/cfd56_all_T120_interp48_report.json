@@ -1,0 +1,27 @@
+{
+  "part_h5": [
+    ".\\SDIFT模型\\data\\cfd49_all_T120_interp48.h5",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_1.h5",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_2.h5",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_3.h5",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_4.h5"
+  ],
+  "part_manifest": [
+    ".\\SDIFT模型\\data\\cfd49_all_T120_interp48_manifest.csv",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_1_manifest.csv",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_2_manifest.csv",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_3_manifest.csv",
+    ".\\SDIFT模型\\data\\cfd7_0200_bg2\\part_4_manifest.csv"
+  ],
+  "meta_template": ".\\SDIFT模型\\data\\cfd49_all_T120_interp48_meta.npy",
+  "merged_case_count": 56,
+  "shape": [
+    56,
+    120,
+    48,
+    48,
+    48
+  ],
+  "out_h5_size_gb": 1.8953,
+  "out_meta_size_mb": 12.6591
+}

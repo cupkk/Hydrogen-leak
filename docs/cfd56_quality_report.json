@@ -1,0 +1,94 @@
+{
+  "h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd56_all_T120_interp48.h5",
+  "manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\cfd56_all_T120_interp48_manifest.csv",
+  "case_count": 56,
+  "flagged_count": 8,
+  "flagged_cases": [
+    {
+      "data_index": 48,
+      "case_id": "case_0048",
+      "raw_case_name": "6,0,100,0,400",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.6397626367847806e-08
+    },
+    {
+      "data_index": 49,
+      "case_id": "case_0049",
+      "raw_case_name": "6,0,200,0,100",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 50,
+      "case_id": "case_0050",
+      "raw_case_name": "6,0,200,0,200",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 51,
+      "case_id": "case_0051",
+      "raw_case_name": "6,0,200,0,50",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 52,
+      "case_id": "case_0052",
+      "raw_case_name": "6,0,200,0,400",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 53,
+      "case_id": "case_0053",
+      "raw_case_name": "6,0,200,0,600",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 54,
+      "case_id": "case_0054",
+      "raw_case_name": "6,0,200,0,1000",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    },
+    {
+      "data_index": 55,
+      "case_id": "case_0055",
+      "raw_case_name": "6,0,200,0,800",
+      "flags": "near_constant_field;mean_too_high",
+      "min": 0.9999998807907104,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "std": 1.782175651499074e-08
+    }
+  ],
+  "thresholds": {
+    "constant_std_threshold": 1e-07,
+    "high_mean_threshold": 0.05,
+    "high_max_threshold": 1.5,
+    "near_zero_max_threshold": 1e-12
+  }
+}

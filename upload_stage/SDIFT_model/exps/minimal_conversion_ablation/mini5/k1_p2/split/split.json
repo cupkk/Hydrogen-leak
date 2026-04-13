@@ -1,0 +1,33 @@
+{
+  "input_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k1_p2\\data\\mini5_k1_p2.h5",
+  "manifest_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k1_p2\\data\\mini5_k1_p2_manifest.csv",
+  "dataset_key": "data",
+  "holdout_positions_mm": [
+    [
+      400,
+      0,
+      0
+    ]
+  ],
+  "train": {
+    "count": 3,
+    "positions": {
+      "300,0,0": 3
+    },
+    "case_ids": [
+      "case_0000",
+      "case_0002",
+      "case_0003"
+    ]
+  },
+  "test": {
+    "count": 2,
+    "positions": {
+      "400,0,0": 2
+    },
+    "case_ids": [
+      "case_0001",
+      "case_0004"
+    ]
+  }
+}

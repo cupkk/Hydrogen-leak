@@ -8,13 +8,15 @@ import time
 
 import h5py
 import numpy as np
+import pandas as pd
 from scipy.spatial import cKDTree
 from tqdm import tqdm
 
 
 CASE_NAME_RE = re.compile(r"^(?P<x>-?\d+),(?P<y>-?\d+),(?P<z>-?\d+),(?P<rate>\d+)mlmin$", re.IGNORECASE)
 CASE_NAME_QXY_RE = re.compile(r"^Q(?P<rate>\d+)-X(?P<x>-?\d+)-Y(?P<y>-?\d+)-Fraction$", re.IGNORECASE)
-CASE_NAME_PREFIX_RE = re.compile(r"^\d+,(?P<x>-?\d+),(?P<y>-?\d+),(?P<rate>\d+)$", re.IGNORECASE)
+CASE_NAME_5FIELD_RE = re.compile(r"^\d+,(?P<y>-?\d+),(?P<x>-?\d+),(?P<z>-?\d+),(?P<rate>\d+)$", re.IGNORECASE)
+CASE_NAME_PREFIX_RE = re.compile(r"^\d+,(?P<y>-?\d+),(?P<x>-?\d+),(?P<rate>\d+)$", re.IGNORECASE)
 FRAME_RE = re.compile(r"-(\d+(?:\.\d+)?)(?:\(\d+\))?(?:\.0)?(?:\.baiduyun\.p\.downloading)?$", re.IGNORECASE)
 DUPLICATE_COPY_RE = re.compile(r"\(\d+\)(?=\.0(?:\.baiduyun\.p\.downloading)?$|$)", re.IGNORECASE)
 
@@ -44,14 +46,34 @@ def is_duplicate_copy(path):
 
 
 def read_xyzv(path):
-    data = np.loadtxt(path, skiprows=1, usecols=(1, 2, 3, 4), dtype=np.float32)
+    df = pd.read_csv(
+        path,
+        sep=r"\s+",
+        skiprows=1,
+        header=None,
+        usecols=[1, 2, 3, 4],
+        dtype=np.float32,
+        engine="c",
+        memory_map=True,
+    )
+    data = df.to_numpy(dtype=np.float32, copy=False)
     if data.ndim == 1:
         data = data[None, :]
     return data[:, 0], data[:, 1], data[:, 2], data[:, 3]
 
 
 def read_values(path):
-    values = np.loadtxt(path, skiprows=1, usecols=(4,), dtype=np.float32)
+    df = pd.read_csv(
+        path,
+        sep=r"\s+",
+        skiprows=1,
+        header=None,
+        usecols=[4],
+        dtype=np.float32,
+        engine="c",
+        memory_map=True,
+    )
+    values = df.to_numpy(dtype=np.float32, copy=False).reshape(-1)
     if values.ndim == 0:
         values = values[None]
     return values
@@ -90,6 +112,18 @@ def compute_idw_weights(points, query, k=8, power=2.0):
     return idx.astype(np.int64), weights.astype(np.float32)
 
 
+def geometry_signature(points):
+    n = int(points.shape[0])
+    sample_ids = [0, max(0, n // 2), max(0, n - 1)]
+    sample = points[sample_ids].astype(np.float32)
+    return (
+        n,
+        tuple(np.round(sample.reshape(-1), 6).tolist()),
+        tuple(np.round(points.min(axis=0), 6).tolist()),
+        tuple(np.round(points.max(axis=0), 6).tolist()),
+    )
+
+
 def resolve_case_data_dir(root_dir):
     current = root_dir
     visited = set()
@@ -124,18 +158,22 @@ def discover_case_dirs(scan_roots):
         if not os.path.isdir(root):
             continue
 
-        direct_files = [p for p in glob.glob(os.path.join(root, "*")) if os.path.isfile(p)]
-        if direct_files:
-            cases.append((os.path.basename(root), root))
-            continue
-
+        child_case_dirs = []
         for name in sorted(os.listdir(root)):
             subdir = os.path.join(root, name)
             if not os.path.isdir(subdir):
                 continue
             data_dir = resolve_case_data_dir(subdir)
             if data_dir:
-                cases.append((os.path.basename(subdir), data_dir))
+                child_case_dirs.append((os.path.basename(subdir), data_dir))
+
+        if child_case_dirs:
+            cases.extend(child_case_dirs)
+            continue
+
+        direct_files = [p for p in glob.glob(os.path.join(root, "*")) if os.path.isfile(p)]
+        if direct_files:
+            cases.append((os.path.basename(root), root))
     dedup = {}
     for case_name, data_dir in cases:
         dedup[case_name] = data_dir
@@ -161,6 +199,18 @@ def parse_case_name(case_name):
             "source_x_mm": int(match.group("x")),
             "source_y_mm": int(match.group("y")),
             "source_z_mm": 0,
+            "leak_rate_ml_min": int(match.group("rate")),
+        }
+
+    match = CASE_NAME_5FIELD_RE.match(normalized_case_name)
+    if match:
+        # Five-field folders from the newer CFD batch follow:
+        # diameter_mm, y_mm, x_mm, z_mm, leak_rate_ml_min
+        return {
+            "raw_case_name": normalized_case_name,
+            "source_x_mm": int(match.group("x")),
+            "source_y_mm": int(match.group("y")),
+            "source_z_mm": int(match.group("z")),
             "leak_rate_ml_min": int(match.group("rate")),
         }
 
@@ -310,6 +360,7 @@ def main():
     skipped_cases = []
     repaired_cases = []
     conversion_start = time.time()
+    interp_cache = {}
 
     with h5py.File(args.out_h5, "w") as f:
         dset = f.create_dataset(
@@ -376,7 +427,13 @@ def main():
                         x, y, z, values = read_xyzv(frame_path)
                         u, v, w = canonicalize_coordinates(x, y, z)
                         points = np.stack([u, v, w], axis=1).astype(np.float32)
-                        idx, weights = compute_idw_weights(points, query, k=args.interp_k, power=args.interp_power)
+                        sig = geometry_signature(points)
+                        cached = interp_cache.get(sig)
+                        if cached is None:
+                            idx, weights = compute_idw_weights(points, query, k=args.interp_k, power=args.interp_power)
+                            interp_cache[sig] = (idx, weights)
+                        else:
+                            idx, weights = cached
                     else:
                         values = read_values(frame_path)
 

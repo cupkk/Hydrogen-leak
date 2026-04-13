@@ -1,0 +1,26 @@
+{
+  "dataset_prefix": "abl_mini5_k8_p2",
+  "num_cases": 2,
+  "cases": [
+    {
+      "case_id": "case_0001",
+      "raw_case_name": "Q100-X400-Y0-Fraction",
+      "data_index": 0,
+      "sensor_path": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\sensors\\case_0001_sensors.npy",
+      "recon_mat": "D:\\github\\Hydrogen-leak\\SDIFT模型\\results\\abl_mini5_k8_p2_case_0001_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\eval\\case_0001_eval.json",
+      "eval_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\eval\\case_0001_per_time.csv"
+    },
+    {
+      "case_id": "case_0004",
+      "raw_case_name": "Q400-X400-Y0-Fraction",
+      "data_index": 1,
+      "sensor_path": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\sensors\\case_0004_sensors.npy",
+      "recon_mat": "D:\\github\\Hydrogen-leak\\SDIFT模型\\results\\abl_mini5_k8_p2_case_0004_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\eval\\case_0004_eval.json",
+      "eval_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\eval\\case_0004_per_time.csv"
+    }
+  ],
+  "aggregate_json": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\aggregate_metrics.json",
+  "aggregate_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\exps\\minimal_conversion_ablation\\mini5\\k8_p2\\eval\\aggregate_metrics.csv"
+}

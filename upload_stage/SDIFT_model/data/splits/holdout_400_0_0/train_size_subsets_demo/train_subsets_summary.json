@@ -1,0 +1,178 @@
+{
+  "input_h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train.h5",
+  "manifest_csv": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_manifest.csv",
+  "total_count": 31,
+  "subsets": [
+    {
+      "size": 6,
+      "h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_006\\train_006.h5",
+      "manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_006\\train_006_manifest.csv",
+      "summary": {
+        "count": 6,
+        "positions": {
+          "0,-150,0": 2,
+          "100,0,0": 1,
+          "200,-300,0": 1,
+          "200,-150,0": 1,
+          "300,0,0": 1
+        },
+        "leak_rates_by_position": {
+          "0,-150,0": [
+            50,
+            100
+          ],
+          "100,0,0": [
+            600
+          ],
+          "200,-300,0": [
+            50
+          ],
+          "200,-150,0": [
+            50
+          ],
+          "300,0,0": [
+            50
+          ]
+        },
+        "case_ids": [
+          "case_0004",
+          "case_0008",
+          "case_0020",
+          "case_0012",
+          "case_0032",
+          "case_0001"
+        ]
+      }
+    },
+    {
+      "size": 12,
+      "h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_012\\train_012.h5",
+      "manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_012\\train_012_manifest.csv",
+      "summary": {
+        "count": 12,
+        "positions": {
+          "0,-150,0": 3,
+          "100,0,0": 3,
+          "200,-300,0": 2,
+          "200,-150,0": 2,
+          "300,0,0": 2
+        },
+        "leak_rates_by_position": {
+          "0,-150,0": [
+            50,
+            100,
+            200
+          ],
+          "100,0,0": [
+            600,
+            800,
+            1000
+          ],
+          "200,-300,0": [
+            50,
+            100
+          ],
+          "200,-150,0": [
+            50,
+            100
+          ],
+          "300,0,0": [
+            50,
+            100
+          ]
+        },
+        "case_ids": [
+          "case_0004",
+          "case_0008",
+          "case_0020",
+          "case_0012",
+          "case_0032",
+          "case_0001",
+          "case_0009",
+          "case_0016",
+          "case_0023",
+          "case_0024",
+          "case_0002",
+          "case_0007"
+        ]
+      }
+    },
+    {
+      "size": 24,
+      "h5": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_024\\train_024.h5",
+      "manifest": "D:\\github\\Hydrogen-leak\\SDIFT模型\\data\\splits\\holdout_400_0_0\\train_size_subsets_demo\\size_024\\train_024_manifest.csv",
+      "summary": {
+        "count": 24,
+        "positions": {
+          "0,-150,0": 6,
+          "100,0,0": 3,
+          "200,-300,0": 5,
+          "200,-150,0": 5,
+          "300,0,0": 5
+        },
+        "leak_rates_by_position": {
+          "0,-150,0": [
+            50,
+            100,
+            200,
+            400,
+            600,
+            800
+          ],
+          "100,0,0": [
+            600,
+            800,
+            1000
+          ],
+          "200,-300,0": [
+            50,
+            100,
+            200,
+            400,
+            600
+          ],
+          "200,-150,0": [
+            50,
+            100,
+            200,
+            400,
+            600
+          ],
+          "300,0,0": [
+            50,
+            100,
+            200,
+            400,
+            600
+          ]
+        },
+        "case_ids": [
+          "case_0004",
+          "case_0008",
+          "case_0020",
+          "case_0012",
+          "case_0032",
+          "case_0001",
+          "case_0009",
+          "case_0016",
+          "case_0023",
+          "case_0024",
+          "case_0002",
+          "case_0007",
+          "case_0018",
+          "case_0015",
+          "case_0028",
+          "case_0003",
+          "case_0019",
+          "case_0011",
+          "case_0030",
+          "case_0005",
+          "case_0021",
+          "case_0013",
+          "case_0034",
+          "case_0006"
+        ]
+      }
+    }
+  ]
+}

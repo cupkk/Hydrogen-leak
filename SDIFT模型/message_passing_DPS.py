@@ -9,6 +9,14 @@ import scipy.io as sio
 import torch
 from tqdm import tqdm
 
+from source_param_utils import (
+    build_leak_rate_feature_dict,
+    estimate_leak_rate,
+    estimate_leak_source,
+    load_leak_rate_calibration,
+)
+from param_regressor_utils import build_core_features, build_sensor_features, load_model as load_param_regressor, predict_ridge_multioutput
+
 
 def set_seed(seed: int = 42):
     random.seed(seed)
@@ -33,12 +41,17 @@ def load_meta(meta_path):
     return u_uni, v_uni, w_uni, t_uni, u_real, v_real, w_real, t_real
 
 
-def load_sensor_observations(sensor_path):
+def load_sensor_observations(sensor_path, observed_time_steps=0):
     d = np.load(sensor_path, allow_pickle=True).item()
     sensor_xyz = d["sensor_xyz"]
     t_vals = d["t"]
     y = d["y"]
     sensor_idx = d.get("sensor_idx", None)
+
+    if observed_time_steps and observed_time_steps > 0:
+        observed_time_steps = min(int(observed_time_steps), int(t_vals.shape[0]))
+        t_vals = t_vals[:observed_time_steps]
+        y = y[:observed_time_steps]
 
     y_group = []
     ind_conti_group = []
@@ -53,6 +66,15 @@ def load_sensor_observations(sensor_path):
     return y_group, ind_conti_group, y_time_group, y_time_ind_group, sensor_idx, t_vals
 
 
+def stack_sensor_groups(y_group):
+    if not y_group:
+        return None
+    lengths = [np.asarray(y).reshape(-1).shape[0] for y in y_group]
+    if len(set(lengths)) != 1:
+        return None
+    return np.stack([np.asarray(y).reshape(-1) for y in y_group], axis=0)
+
+
 def build_sensor_mask(sensor_idx, shape):
     if sensor_idx is None:
         return None
@@ -60,62 +82,6 @@ def build_sensor_mask(sensor_idx, shape):
     for idx in sensor_idx:
         mask[:, idx[0], idx[1], idx[2]] = 1
     return mask
-
-
-def estimate_leak_source(field, u_axis, v_axis, w_axis, time_window=5, radius=1):
-    if field.ndim != 4:
-        raise ValueError("field must be [T, U, V, W]")
-    t_window = min(time_window, field.shape[0])
-    avg_field = field[:t_window].mean(axis=0)
-    max_idx = np.unravel_index(np.argmax(avg_field), avg_field.shape)
-
-    u0 = max(0, max_idx[0] - radius)
-    u1 = min(avg_field.shape[0], max_idx[0] + radius + 1)
-    v0 = max(0, max_idx[1] - radius)
-    v1 = min(avg_field.shape[1], max_idx[1] + radius + 1)
-    w0 = max(0, max_idx[2] - radius)
-    w1 = min(avg_field.shape[2], max_idx[2] + radius + 1)
-    local_mean = float(avg_field[u0:u1, v0:v1, w0:w1].mean())
-    peak = float(avg_field[max_idx])
-
-    return {
-        "index": [int(max_idx[0]), int(max_idx[1]), int(max_idx[2])],
-        "position": [
-            float(u_axis[max_idx[0]]),
-            float(v_axis[max_idx[1]]),
-            float(w_axis[max_idx[2]]),
-        ],
-        "strength": local_mean,
-        "peak": peak,
-        "time_window": int(t_window),
-        "radius": int(radius),
-    }
-
-
-def load_leak_rate_calibration(path):
-    if not path:
-        return None
-    with open(path, "r", encoding="utf-8") as f:
-        cfg = json.load(f)
-    if "type" not in cfg:
-        raise ValueError("leak-rate calibration must contain 'type'")
-    return cfg
-
-
-def estimate_leak_rate(strength, calibration):
-    if calibration is None:
-        return None
-    ctype = calibration.get("type", "").lower()
-    if ctype == "linear":
-        a = float(calibration.get("a", 1.0))
-        b = float(calibration.get("b", 0.0))
-        return a * float(strength) + b
-    if ctype == "power":
-        a = float(calibration.get("a", 1.0))
-        p = float(calibration.get("p", 1.0))
-        b = float(calibration.get("b", 0.0))
-        return a * (max(float(strength), 0.0) ** p) + b
-    raise ValueError(f"Unsupported leak-rate calibration type: {calibration.get('type')}")
 
 
 def get_ktT(y_tt, core_t, gp_gamma=1, gp_sigma=1):
@@ -130,12 +96,27 @@ def get_kTT_inv(t, gp_gamma=1, gp_sigma=1):
     return torch.inverse(k)
 
 
-def compute_continuous_poest(x_0, basis_function, core_mean, core_std, core_t, y_group, ind_conti_group, y_time_group, y_time_ind_group):
+def compute_continuous_poest(
+    x_0,
+    basis_function,
+    core_mean,
+    core_std,
+    core_t,
+    y_group,
+    ind_conti_group,
+    y_time_group,
+    y_time_ind_group,
+    return_stats=False,
+):
     core_tensor_shape = x_0.shape
     x_0 = x_0.view(core_tensor_shape[0], core_tensor_shape[1], -1)
     poest_matrix1 = torch.zeros_like(x_0).to(device)
     poest_matrix2 = torch.zeros_like(x_0).to(device)
     x_0 = x_0 * core_std + core_mean
+    direct_residual_norms = []
+    aggregate_residual_norms = []
+    direct_update_norms = []
+    aggregate_update_norms = []
 
     for y, y_tt, y_t_ind, ind in zip(y_group, y_time_group, y_time_ind_group, ind_conti_group):
         if y.shape[0] == 0:
@@ -145,7 +126,12 @@ def compute_continuous_poest(x_0, basis_function, core_mean, core_std, core_t, y
         y = torch.DoubleTensor(y).to(device)
         ind_conti = torch.FloatTensor(ind).to(device)
         a = basis_function(input_ind_sampl=ind_conti).detach().double()
-        poest_matrix1[0, y_t_ind, :] = (a.T @ (y - a @ x_0_t))
+        direct_residual = y - a @ x_0_t
+        direct_update = a.T @ direct_residual
+        poest_matrix1[0, y_t_ind, :] = direct_update
+        if return_stats:
+            direct_residual_norms.append(float(torch.linalg.vector_norm(direct_residual).detach().cpu()))
+            direct_update_norms.append(float(torch.linalg.vector_norm(direct_update).detach().cpu()))
 
         t_remove_group = y_time_ind_group.copy()
         t_remove_group.remove(y_t_ind)
@@ -157,18 +143,223 @@ def compute_continuous_poest(x_0, basis_function, core_mean, core_std, core_t, y
         coeff = (ktT @ kTT_inv).to(device).squeeze(1)
 
         x_0_aggregate = (coeff @ x_0_remove).squeeze()
-        post = (a.T @ (y - a @ x_0_aggregate))
+        aggregate_residual = y - a @ x_0_aggregate
+        post = a.T @ aggregate_residual
         temp = torch.zeros_like(x_0).to(device)
         temp[:, t_remove_group, :] = torch.kron(coeff.unsqueeze(2), post.unsqueeze(0).unsqueeze(0))
         poest_matrix2 += temp
+        if return_stats:
+            aggregate_residual_norms.append(float(torch.linalg.vector_norm(aggregate_residual).detach().cpu()))
+            aggregate_update_norms.append(float(torch.linalg.vector_norm(post).detach().cpu()))
 
-    return (poest_matrix1 + MPDPS * poest_matrix2).view(core_tensor_shape)
+    llk_grad = (poest_matrix1 + MPDPS * poest_matrix2).view(core_tensor_shape)
+    if not return_stats:
+        return llk_grad
+
+    stats = {
+        "num_observation_slices": int(sum(1 for y in y_group if np.asarray(y).shape[0] > 0)),
+        "poest_matrix1_norm": float(torch.linalg.vector_norm(poest_matrix1).detach().cpu()),
+        "poest_matrix2_norm": float(torch.linalg.vector_norm(poest_matrix2).detach().cpu()),
+        "llk_grad_norm": float(torch.linalg.vector_norm(llk_grad).detach().cpu()),
+        "direct_residual_norm_mean": float(np.mean(direct_residual_norms)) if direct_residual_norms else 0.0,
+        "aggregate_residual_norm_mean": float(np.mean(aggregate_residual_norms)) if aggregate_residual_norms else 0.0,
+        "direct_update_norm_mean": float(np.mean(direct_update_norms)) if direct_update_norms else 0.0,
+        "aggregate_update_norm_mean": float(np.mean(aggregate_update_norms)) if aggregate_update_norms else 0.0,
+    }
+    return llk_grad, stats
+
+
+def get_obs_base_scale(step_index, zeta_value, schedule):
+    if schedule == "constant":
+        return float(zeta_value)
+    if schedule == "legacy_decay":
+        return float(zeta_value) / float(step_index + 1)
+    raise ValueError(f"unsupported obs_scale_schedule: {schedule}")
+
+
+def get_effective_obs_scale(
+    base_scale,
+    llk_grad_norm,
+    diffusion_update_norm,
+    injection_mode,
+    target_ratio,
+    min_scale,
+    max_scale,
+    scale_blend,
+):
+    if llk_grad_norm <= 0.0:
+        target_scale = 0.0
+    else:
+        target_scale = float(target_ratio) * float(diffusion_update_norm) / float(llk_grad_norm)
+
+    if injection_mode == "legacy":
+        raw_scale = float(base_scale)
+    else:
+        if scale_blend == "replace":
+            raw_scale = target_scale
+        else:
+            raw_scale = max(float(base_scale), float(target_scale))
+
+    effective_scale = min(max(float(raw_scale), float(min_scale)), float(max_scale))
+    return effective_scale, float(target_scale), float(raw_scale)
+
+
+def aggregate_llk_stats(stats_rows):
+    if not stats_rows:
+        return {}
+    keys = [
+        "num_observation_slices",
+        "poest_matrix1_norm",
+        "poest_matrix2_norm",
+        "llk_grad_norm",
+        "direct_residual_norm_mean",
+        "aggregate_residual_norm_mean",
+        "direct_update_norm_mean",
+        "aggregate_update_norm_mean",
+    ]
+    out = {}
+    for key in keys:
+        vals = [row[key] for row in stats_rows if key in row]
+        if vals:
+            out[key] = float(np.mean(vals))
+    return out
+
+
+def apply_observation_conditioning(
+    edm,
+    basis_function,
+    x_next,
+    denoised_core,
+    i_next,
+    t,
+    y_group,
+    ind_conti_group,
+    y_time_group,
+    y_time_ind_group,
+    step_index,
+    diffusion_update_norm,
+    use_ema,
+    zeta_value,
+    obs_injection_mode,
+    obs_scale_schedule,
+    obs_scale_blend,
+    obs_target_ratio,
+    obs_min_scale,
+    obs_max_scale,
+    obs_inner_steps,
+    obs_inner_decay,
+    save_diagnostics,
+):
+    inner_steps = 1 if obs_injection_mode in {"legacy", "adaptive_ratio"} else max(1, int(obs_inner_steps))
+    x_before_obs = x_next
+    x_obs = x_next
+    current_core = denoised_core
+    base_scale = get_obs_base_scale(step_index, zeta_value, obs_scale_schedule)
+
+    inner_scales = []
+    inner_target_scales = []
+    inner_raw_scales = []
+    inner_grad_norms = []
+    inner_update_norms = []
+    llk_stats_rows = []
+
+    for inner_idx in range(inner_steps):
+        if save_diagnostics:
+            llk_grad, llk_stats = compute_continuous_poest(
+                current_core,
+                basis_function,
+                core_mean,
+                core_std,
+                t,
+                y_group,
+                ind_conti_group,
+                y_time_group,
+                y_time_ind_group,
+                return_stats=True,
+            )
+            llk_stats_rows.append(llk_stats)
+        else:
+            llk_grad = compute_continuous_poest(
+                current_core,
+                basis_function,
+                core_mean,
+                core_std,
+                t,
+                y_group,
+                ind_conti_group,
+                y_time_group,
+                y_time_ind_group,
+            )
+
+        llk_grad_norm = float(torch.linalg.vector_norm(llk_grad).detach().cpu())
+        decay = float(obs_inner_decay) ** inner_idx if obs_injection_mode == "direct_inner" else 1.0
+        inner_base_scale = float(base_scale) * decay
+        effective_scale, target_scale, raw_scale = get_effective_obs_scale(
+            base_scale=inner_base_scale,
+            llk_grad_norm=llk_grad_norm,
+            diffusion_update_norm=diffusion_update_norm,
+            injection_mode=obs_injection_mode,
+            target_ratio=obs_target_ratio * decay,
+            min_scale=obs_min_scale,
+            max_scale=obs_max_scale,
+            scale_blend=obs_scale_blend,
+        )
+        obs_update = effective_scale * llk_grad
+        x_obs = x_obs + obs_update
+
+        inner_scales.append(float(effective_scale))
+        inner_target_scales.append(float(target_scale))
+        inner_raw_scales.append(float(raw_scale))
+        inner_grad_norms.append(float(llk_grad_norm))
+        inner_update_norms.append(float(torch.linalg.vector_norm(obs_update).detach().cpu()))
+
+        if obs_injection_mode == "direct_inner" and inner_idx < inner_steps - 1:
+            current_core = edm(x_obs, i_next, t, use_ema=use_ema).to(torch.float64)
+
+    total_obs_update = x_obs - x_before_obs
+    total_obs_update_norm = float(torch.linalg.vector_norm(total_obs_update).detach().cpu())
+    diag_row = {
+        "obs_injection_mode": obs_injection_mode,
+        "obs_scale_schedule": obs_scale_schedule,
+        "obs_scale_blend": obs_scale_blend,
+        "obs_target_ratio": float(obs_target_ratio),
+        "obs_base_scale": float(base_scale),
+        "obs_inner_steps_used": int(inner_steps),
+        "obs_scale": float(inner_scales[0]) if inner_scales else 0.0,
+        "obs_scale_final": float(inner_scales[-1]) if inner_scales else 0.0,
+        "obs_target_scale": float(inner_target_scales[0]) if inner_target_scales else 0.0,
+        "obs_target_scale_final": float(inner_target_scales[-1]) if inner_target_scales else 0.0,
+        "obs_raw_scale": float(inner_raw_scales[0]) if inner_raw_scales else 0.0,
+        "obs_raw_scale_final": float(inner_raw_scales[-1]) if inner_raw_scales else 0.0,
+        "llk_grad_norm": float(inner_grad_norms[0]) if inner_grad_norms else 0.0,
+        "llk_grad_norm_mean": float(np.mean(inner_grad_norms)) if inner_grad_norms else 0.0,
+        "obs_update_norm": float(total_obs_update_norm),
+        "obs_inner_total_update_norm": float(total_obs_update_norm),
+        "obs_over_diffusion_ratio": float(total_obs_update_norm / (diffusion_update_norm + 1e-12)),
+        "equal_norm_obs_scale": float(diffusion_update_norm / (inner_grad_norms[0] + 1e-12)) if inner_grad_norms else None,
+        "obs_inner_scales": [float(x) for x in inner_scales],
+        "obs_inner_target_scales": [float(x) for x in inner_target_scales],
+        "obs_inner_raw_scales": [float(x) for x in inner_raw_scales],
+        "obs_inner_grad_norms": [float(x) for x in inner_grad_norms],
+        "obs_inner_update_norms": [float(x) for x in inner_update_norms],
+    }
+    diag_row.update(aggregate_llk_stats(llk_stats_rows))
+    return x_obs, diag_row
 
 
 @torch.no_grad()
 def edm_post_sampler(
     edm, basis_function, latents, t, y_group, ind_conti_group, y_time_group, y_time_ind_group,
     num_steps=18, sigma_min=0.002, sigma_max=80, rho=7, use_ema=False,
+    save_diagnostics=False,
+    obs_injection_mode="legacy",
+    obs_scale_schedule="legacy_decay",
+    obs_scale_blend="max",
+    obs_target_ratio=0.25,
+    obs_min_scale=0.0,
+    obs_max_scale=500.0,
+    obs_inner_steps=3,
+    obs_inner_decay=0.7,
 ):
     sigma_min = max(sigma_min, edm.sigma_min)
     sigma_max = min(sigma_max, edm.sigma_max)
@@ -180,6 +371,7 @@ def edm_post_sampler(
     x_next = latents.to(torch.float64) * i_steps[0]
     print("sampling")
     t_start = time.time()
+    diagnostics = [] if save_diagnostics else None
 
     for i, (i_cur, i_next) in tqdm(enumerate(zip(i_steps[:-1], i_steps[1:]))):
         x_hat = x_next
@@ -196,14 +388,47 @@ def edm_post_sampler(
             d_prime = (x_next - denoised) / i_next
             x_next = x_hat + (i_next - i_hat) * (0.5 * d_cur + 0.5 * d_prime)
             denoised_core = (denoised_core1 + denoised_core2) / 2
-            llk_grad = compute_continuous_poest(
-                denoised_core, basis_function, core_mean, core_std, t,
-                y_group, ind_conti_group, y_time_group, y_time_ind_group,
+            diffusion_update = x_next - x_hat
+            diffusion_update_norm = float(torch.linalg.vector_norm(diffusion_update).detach().cpu())
+            x_next, obs_diag_row = apply_observation_conditioning(
+                edm=edm,
+                basis_function=basis_function,
+                x_next=x_next,
+                denoised_core=denoised_core,
+                i_next=i_next,
+                t=t,
+                y_group=y_group,
+                ind_conti_group=ind_conti_group,
+                y_time_group=y_time_group,
+                y_time_ind_group=y_time_ind_group,
+                step_index=i,
+                diffusion_update_norm=diffusion_update_norm,
+                use_ema=use_ema,
+                zeta_value=zeta,
+                obs_injection_mode=obs_injection_mode,
+                obs_scale_schedule=obs_scale_schedule,
+                obs_scale_blend=obs_scale_blend,
+                obs_target_ratio=obs_target_ratio,
+                obs_min_scale=obs_min_scale,
+                obs_max_scale=obs_max_scale,
+                obs_inner_steps=obs_inner_steps,
+                obs_inner_decay=obs_inner_decay,
+                save_diagnostics=save_diagnostics,
             )
-            x_next = x_next + (zeta / (i + 1)) * llk_grad
+            if save_diagnostics:
+                diag_row = {
+                    "step_index": int(i),
+                    "sigma_cur": float(i_cur.detach().cpu()),
+                    "sigma_next": float(i_next.detach().cpu()),
+                    "diffusion_update_norm": diffusion_update_norm,
+                }
+                diag_row.update(obs_diag_row)
+                diagnostics.append(diag_row)
 
     print(f"Elapsed time: {time.time() - t_start:.4f} seconds")
     print("sampling ", num_steps, " steps completed")
+    if save_diagnostics:
+        return x_next, diagnostics
     return x_next
 
 
@@ -279,13 +504,17 @@ if __name__ == "__main__":
     parser.add_argument("--seed", default=123, type=int, help="global seed")
     parser.add_argument("--metadata_path", type=str, default="")
     parser.add_argument("--sensor_path", type=str, default="")
+    parser.add_argument("--observed_time_steps", type=int, default=0, help="If >0, only use the first N sensor time steps as observations while reconstructing on the full metadata time grid.")
     parser.add_argument("--te_data_path", type=str, default="")
     parser.add_argument("--te_index", type=int, default=0)
     parser.add_argument("--source_time_window", type=int, default=5)
-    parser.add_argument("--source_radius", type=int, default=1)
+    parser.add_argument("--source_radius", type=int, default=2)
+    parser.add_argument("--source_abs_threshold", type=float, default=1e-6)
+    parser.add_argument("--source_rel_threshold", type=float, default=0.1)
     parser.add_argument("--core_mean_std_path", type=str, default="")
     parser.add_argument("--basis_path", type=str, default="")
     parser.add_argument("--model_path", type=str, default="")
+    parser.add_argument("--param_regressor_json", type=str, default="")
     parser.add_argument("--leak_rate_calibration_json", type=str, default="")
     parser.add_argument("--leak_rate_unit", type=str, default="mL/min")
     parser.add_argument("--source_gt", type=float, nargs=3, default=None)
@@ -315,9 +544,19 @@ if __name__ == "__main__":
     parser.add_argument("--missing_type", default=1, type=int, help="missing type for random sampling")
     parser.add_argument("--mpdps_weight", default=0.4, type=float, help="MPDPS weight")
     parser.add_argument("--zeta", default=0.009, type=float, help="posterior step size")
+    parser.add_argument("--obs_injection_mode", default="legacy", choices=["legacy", "adaptive_ratio", "direct_inner"], help="legacy posterior gradient update, adaptive norm-matched update, or direct inner conditioning.")
+    parser.add_argument("--obs_scale_schedule", default="legacy_decay", choices=["legacy_decay", "constant"], help="base observation scale schedule across denoising steps.")
+    parser.add_argument("--obs_scale_blend", default="max", choices=["max", "replace"], help="how adaptive target scale combines with base scale.")
+    parser.add_argument("--obs_target_ratio", default=0.25, type=float, help="target ratio of observation update norm to diffusion update norm.")
+    parser.add_argument("--obs_min_scale", default=0.0, type=float, help="minimum observation scale after adaptation.")
+    parser.add_argument("--obs_max_scale", default=500.0, type=float, help="maximum observation scale after adaptation.")
+    parser.add_argument("--obs_inner_steps", default=3, type=int, help="number of direct inner observation refinements per denoising step.")
+    parser.add_argument("--obs_inner_decay", default=0.7, type=float, help="per-inner-step decay for direct inner conditioning.")
     parser.add_argument("--num_posterior_samples", default=1, type=int, help="number of posterior samples per case")
     parser.add_argument("--posterior_seed_stride", default=9973, type=int, help="seed stride across posterior samples")
     parser.add_argument("--save_recon_samples", action="store_true", default=False)
+    parser.add_argument("--save_diagnostics", action="store_true", default=False)
+    parser.add_argument("--diagnostics_out", type=str, default="")
     config = parser.parse_args()
 
     from train_GPSD import EDM, create_model, get_gp_covariance
@@ -362,11 +601,13 @@ if __name__ == "__main__":
     recon_samples_list = []
     mask_list = []
     case_summaries = []
+    diagnostics_cases = []
     rho = config.obs_rho
     mt = config.missing_type
     MPDPS = config.mpdps_weight
     zeta = config.zeta
     leak_rate_calibration = load_leak_rate_calibration(config.leak_rate_calibration_json)
+    param_regressor = load_param_regressor(config.param_regressor_json) if config.param_regressor_json else None
 
     use_sensor = bool(config.sensor_path)
     full_data = None
@@ -378,12 +619,15 @@ if __name__ == "__main__":
         if not config.metadata_path:
             raise ValueError("metadata_path is required when sensor_path is provided.")
         u_ind_uni, v_ind_uni, w_ind_uni, t_ind_uni, u_real, v_real, w_real, t_real = load_meta(config.metadata_path)
-        y_group, ind_conti_group, y_time_group, y_time_ind_group, sensor_idx, t_vals = load_sensor_observations(config.sensor_path)
+        y_group, ind_conti_group, y_time_group, y_time_ind_group, sensor_idx, t_vals = load_sensor_observations(
+            config.sensor_path,
+            observed_time_steps=config.observed_time_steps,
+        )
         mask = build_sensor_mask(sensor_idx, (t_vals.shape[0], len(u_ind_uni), len(v_ind_uni), len(w_ind_uni)))
         if mask is not None:
             mask_list.append(mask)
         num_cases = 1
-        t_grid = torch.tensor(t_vals, dtype=torch.float64, device=device).view(1, -1, 1)
+        t_grid = torch.tensor(t_ind_uni, dtype=torch.float64, device=device).view(1, -1, 1)
     else:
         if full_data is None:
             raise ValueError("te_data_path is required when sensor_path is not provided.")
@@ -420,7 +664,7 @@ if __name__ == "__main__":
             basis_function.mode = "sampling"
             noise_sample = torch.randn(sample_shape).to(device).double()
             x_t = (l_sample @ noise_sample.view(sample_shape[0], sample_shape[1], -1)).view(sample_shape)
-            sample = edm_post_sampler(
+            sampler_out = edm_post_sampler(
                 edm,
                 basis_function,
                 x_t,
@@ -431,10 +675,33 @@ if __name__ == "__main__":
                 y_time_ind_group,
                 num_steps=config.total_steps,
                 use_ema=False,
-            ).detach()
+                save_diagnostics=config.save_diagnostics,
+                obs_injection_mode=config.obs_injection_mode,
+                obs_scale_schedule=config.obs_scale_schedule,
+                obs_scale_blend=config.obs_scale_blend,
+                obs_target_ratio=config.obs_target_ratio,
+                obs_min_scale=config.obs_min_scale,
+                obs_max_scale=config.obs_max_scale,
+                obs_inner_steps=config.obs_inner_steps,
+                obs_inner_decay=config.obs_inner_decay,
+            )
+            if config.save_diagnostics:
+                sample, diagnostics_rows = sampler_out
+            else:
+                sample = sampler_out
+                diagnostics_rows = None
+            sample = sample.detach()
             core_sample = sample * core_std + core_mean
             out = decoder(u_ind_uni, v_ind_uni, w_ind_uni, core_sample[0], basis_function)
             posterior_recons.append(out.astype(np.float32))
+            if diagnostics_rows is not None:
+                diagnostics_cases.append(
+                    {
+                        "case_index": int(i),
+                        "posterior_sample_index": int(s),
+                        "steps": diagnostics_rows,
+                    }
+                )
 
         posterior_recons = np.stack(posterior_recons, axis=0)
         recon_mean = posterior_recons.mean(axis=0)
@@ -454,6 +721,8 @@ if __name__ == "__main__":
 
         source_samples = []
         leak_rate_samples = []
+        feature_samples = []
+        regressed_param_samples = []
         for s in range(posterior_recons.shape[0]):
             source = estimate_leak_source(
                 posterior_recons[s],
@@ -462,15 +731,44 @@ if __name__ == "__main__":
                 w_axis,
                 time_window=config.source_time_window,
                 radius=config.source_radius,
+                abs_threshold=config.source_abs_threshold,
+                rel_threshold=config.source_rel_threshold,
             )
             source_samples.append(source)
-            q_hat = estimate_leak_rate(source["strength"], leak_rate_calibration)
+            feature_dict = build_leak_rate_feature_dict(source)
+            feature_samples.append(feature_dict)
+            q_hat = estimate_leak_rate(feature_dict, leak_rate_calibration)
             if q_hat is not None:
                 leak_rate_samples.append(float(q_hat))
+            if param_regressor is not None:
+                input_mode = param_regressor.get("input_mode", "core")
+                if input_mode in {"sensor", "hybrid"}:
+                    sensor_matrix = stack_sensor_groups(y_group)
+                    if sensor_matrix is not None:
+                        sensor_xyz = None
+                        if len(ind_conti_group) > 0 and len(ind_conti_group[0]) > 0:
+                            sensor_xyz = np.asarray(ind_conti_group[0], dtype=np.float64)
+                        sensor_feature = build_sensor_features(
+                            sensor_matrix,
+                            sensor_xyz=sensor_xyz,
+                            early_steps=param_regressor.get("early_steps", 20),
+                        )
+                        if input_mode == "hybrid":
+                            core_feature = build_core_features(core_sample[0].detach().cpu().numpy(), early_steps=param_regressor.get("early_steps", 20))
+                            sensor_feature = np.concatenate([core_feature, sensor_feature], axis=0)
+                        pred_param = predict_ridge_multioutput(sensor_feature, param_regressor)[0]
+                        regressed_param_samples.append(pred_param.astype(np.float64))
+                else:
+                    core_feature = build_core_features(core_sample[0].detach().cpu().numpy(), early_steps=param_regressor.get("early_steps", 20))
+                    pred_param = predict_ridge_multioutput(core_feature, param_regressor)[0]
+                    regressed_param_samples.append(pred_param.astype(np.float64))
 
         source_pos = np.array([x["position"] for x in source_samples], dtype=np.float64)
         source_strength = np.array([x["strength"] for x in source_samples], dtype=np.float64)
         source_peak = np.array([x["peak"] for x in source_samples], dtype=np.float64)
+        source_score_peak = np.array([x["score_peak"] for x in source_samples], dtype=np.float64)
+        mass_slope_early = np.array([x["mass_slope_early"] for x in source_samples], dtype=np.float64)
+        mass_mean_early = np.array([x["mass_mean_early"] for x in source_samples], dtype=np.float64)
         source_idx = np.array([x["index"] for x in source_samples], dtype=np.float64)
         low_q = 2.5
         high_q = 97.5
@@ -492,15 +790,32 @@ if __name__ == "__main__":
             "peak_mean": float(np.mean(source_peak)),
             "peak_ci_low": float(np.percentile(source_peak, low_q)),
             "peak_ci_high": float(np.percentile(source_peak, high_q)),
+            "score_peak_mean": float(np.mean(source_score_peak)),
+            "score_peak_ci_low": float(np.percentile(source_score_peak, low_q)),
+            "score_peak_ci_high": float(np.percentile(source_score_peak, high_q)),
+            "mass_slope_early_mean": float(np.mean(mass_slope_early)),
+            "mass_slope_early_ci_low": float(np.percentile(mass_slope_early, low_q)),
+            "mass_slope_early_ci_high": float(np.percentile(mass_slope_early, high_q)),
+            "mass_mean_early_mean": float(np.mean(mass_mean_early)),
+            "mass_mean_early_ci_low": float(np.percentile(mass_mean_early, low_q)),
+            "mass_mean_early_ci_high": float(np.percentile(mass_mean_early, high_q)),
+            "source_abs_threshold": float(config.source_abs_threshold),
+            "source_rel_threshold": float(config.source_rel_threshold),
             "time_window": int(config.source_time_window),
             "radius": int(config.source_radius),
             "num_posterior_samples": int(config.num_posterior_samples),
+            "method": source_samples[0].get("method", "unknown") if source_samples else "unknown",
         }
+        source_summary["features_mean"] = {
+            key: float(np.mean([sample[key] for sample in feature_samples]))
+            for key in feature_samples[0].keys()
+        } if feature_samples else {}
 
         leak_rate_summary = None
         if leak_rate_samples:
             leak_rate_arr = np.array(leak_rate_samples, dtype=np.float64)
             leak_rate_summary = {
+                "method": "calibration",
                 "unit": config.leak_rate_unit,
                 "mean": float(leak_rate_arr.mean()),
                 "ci_low": float(np.percentile(leak_rate_arr, low_q)),
@@ -513,6 +828,32 @@ if __name__ == "__main__":
                 if float(config.leak_rate_gt) != 0.0:
                     leak_rate_summary["rel_error"] = float(abs((leak_rate_summary["mean"] - float(config.leak_rate_gt)) / float(config.leak_rate_gt)))
 
+        regressed_summary = None
+        if regressed_param_samples:
+            regressed_arr = np.asarray(regressed_param_samples, dtype=np.float64)
+            regressed_summary = {
+                "method": "core_regressor",
+                "source_position_mean": regressed_arr[:, :3].mean(axis=0).tolist(),
+                "source_position_ci_low": np.percentile(regressed_arr[:, :3], low_q, axis=0).tolist(),
+                "source_position_ci_high": np.percentile(regressed_arr[:, :3], high_q, axis=0).tolist(),
+                "leak_rate_unit": config.leak_rate_unit,
+                "leak_rate_mean": float(regressed_arr[:, 3].mean()),
+                "leak_rate_ci_low": float(np.percentile(regressed_arr[:, 3], low_q)),
+                "leak_rate_ci_high": float(np.percentile(regressed_arr[:, 3], high_q)),
+                "target_names": param_regressor.get("target_names", []),
+            }
+            if config.source_gt is not None:
+                gt_pos = np.array(config.source_gt, dtype=np.float64)
+                pred_pos = np.array(regressed_summary["source_position_mean"], dtype=np.float64)
+                regressed_summary["source_l2_error"] = float(np.linalg.norm(pred_pos - gt_pos))
+            if config.leak_rate_gt is not None:
+                q_pred = float(regressed_summary["leak_rate_mean"])
+                q_gt = float(config.leak_rate_gt)
+                regressed_summary["leak_rate_gt"] = q_gt
+                regressed_summary["leak_rate_abs_error"] = float(abs(q_pred - q_gt))
+                if q_gt != 0.0:
+                    regressed_summary["leak_rate_rel_error"] = float(abs((q_pred - q_gt) / q_gt))
+
         source_error = None
         if config.source_gt is not None:
             gt_pos = np.array(config.source_gt, dtype=np.float64)
@@ -524,6 +865,7 @@ if __name__ == "__main__":
                 "case_index": int(i),
                 "source": source_summary,
                 "leak_rate": leak_rate_summary,
+                "param_regressor": regressed_summary,
                 "source_error": source_error,
             }
         )
@@ -556,6 +898,15 @@ if __name__ == "__main__":
         "result_name": result_name,
         "num_cases": int(num_cases),
         "num_posterior_samples": int(config.num_posterior_samples),
+        "observed_time_steps": int(config.observed_time_steps),
+        "obs_injection_mode": config.obs_injection_mode,
+        "obs_scale_schedule": config.obs_scale_schedule,
+        "obs_scale_blend": config.obs_scale_blend,
+        "obs_target_ratio": float(config.obs_target_ratio),
+        "obs_min_scale": float(config.obs_min_scale),
+        "obs_max_scale": float(config.obs_max_scale),
+        "obs_inner_steps": int(config.obs_inner_steps),
+        "obs_inner_decay": float(config.obs_inner_decay),
         "leak_rate_unit": config.leak_rate_unit,
         "rmse_mean": float(rmse_list.mean()) if rmse_list.size > 0 else None,
         "rmse_std": float(rmse_list.std()) if rmse_list.size > 0 else None,
@@ -563,3 +914,15 @@ if __name__ == "__main__":
     }
     with open(os.path.join("./results", result_name + "_summary.json"), "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
+
+    if config.save_diagnostics:
+        diagnostics_payload = {
+            "dataset": config.dataset,
+            "result_name": result_name,
+            "num_cases": int(num_cases),
+            "num_posterior_samples": int(config.num_posterior_samples),
+            "cases": diagnostics_cases,
+        }
+        diagnostics_out = config.diagnostics_out or os.path.join("./results", result_name + "_diagnostics.json")
+        with open(diagnostics_out, "w", encoding="utf-8") as f:
+            json.dump(diagnostics_payload, f, ensure_ascii=False, indent=2)

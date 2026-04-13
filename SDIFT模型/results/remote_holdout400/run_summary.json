@@ -1,0 +1,124 @@
+{
+  "dataset_prefix": "cfd38_holdout400_holdout_eval",
+  "num_cases": 7,
+  "observed_time_steps": 0,
+  "cases": [
+    {
+      "case_id": "case_0025",
+      "raw_case_name": "Q100-X400-Y0-Fraction",
+      "data_index": 0,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0025_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0025_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0025_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0025_per_time.csv",
+      "timings": {
+        "sensor_seconds": 41.691065073013306,
+        "reconstruction_seconds": 12.196677684783936,
+        "evaluation_seconds": 2.735797166824341
+      }
+    },
+    {
+      "case_id": "case_0027",
+      "raw_case_name": "Q1000-X400-Y0-Fraction",
+      "data_index": 1,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0027_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0027_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0027_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0027_per_time.csv",
+      "timings": {
+        "sensor_seconds": 41.65779709815979,
+        "reconstruction_seconds": 12.853984117507935,
+        "evaluation_seconds": 2.058912754058838
+      }
+    },
+    {
+      "case_id": "case_0029",
+      "raw_case_name": "Q200-X400-Y0-Fraction",
+      "data_index": 2,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0029_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0029_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0029_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0029_per_time.csv",
+      "timings": {
+        "sensor_seconds": 41.04184532165527,
+        "reconstruction_seconds": 11.563989162445068,
+        "evaluation_seconds": 2.0873167514801025
+      }
+    },
+    {
+      "case_id": "case_0031",
+      "raw_case_name": "Q400-X400-Y0-Fraction",
+      "data_index": 3,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0031_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0031_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0031_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0031_per_time.csv",
+      "timings": {
+        "sensor_seconds": 42.55126643180847,
+        "reconstruction_seconds": 12.075182914733887,
+        "evaluation_seconds": 2.1772513389587402
+      }
+    },
+    {
+      "case_id": "case_0033",
+      "raw_case_name": "Q50-X400-Y0-Fraction",
+      "data_index": 4,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0033_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0033_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0033_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0033_per_time.csv",
+      "timings": {
+        "sensor_seconds": 40.352681398391724,
+        "reconstruction_seconds": 11.53297233581543,
+        "evaluation_seconds": 2.0146093368530273
+      }
+    },
+    {
+      "case_id": "case_0035",
+      "raw_case_name": "Q600-X400-Y0-Fraction",
+      "data_index": 5,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0035_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0035_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0035_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0035_per_time.csv",
+      "timings": {
+        "sensor_seconds": 42.08083748817444,
+        "reconstruction_seconds": 11.836515665054321,
+        "evaluation_seconds": 2.1811912059783936
+      }
+    },
+    {
+      "case_id": "case_0037",
+      "raw_case_name": "Q800-X400-Y0-Fraction",
+      "data_index": 6,
+      "sensor_path": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/sensors/case_0037_sensors.npy",
+      "recon_mat": "/root/Hydrogen-leak/SDIFT_model/results/cfd38_holdout400_holdout_eval_case_0037_mpdps_0.4_recon_rho0.01_mode_1.mat",
+      "eval_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0037_eval.json",
+      "eval_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/eval/case_0037_per_time.csv",
+      "timings": {
+        "sensor_seconds": 42.13833570480347,
+        "reconstruction_seconds": 12.101478099822998,
+        "evaluation_seconds": 2.06864333152771
+      }
+    }
+  ],
+  "timing_summary": {
+    "sensor_seconds": {
+      "mean": 41.64483264514378,
+      "max": 42.55126643180847,
+      "min": 40.352681398391724
+    },
+    "reconstruction_seconds": {
+      "mean": 12.022971425737653,
+      "max": 12.853984117507935,
+      "min": 11.53297233581543
+    },
+    "evaluation_seconds": {
+      "mean": 2.189103126525879,
+      "max": 2.735797166824341,
+      "min": 2.0146093368530273
+    }
+  },
+  "aggregate_json": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/aggregate_metrics.json",
+  "aggregate_csv": "/root/Hydrogen-leak/SDIFT_model/exps/gp-edm_holdout400_cfd38_holdout400_train_20260407-1601/holdout_eval/aggregate_metrics.csv"
+}

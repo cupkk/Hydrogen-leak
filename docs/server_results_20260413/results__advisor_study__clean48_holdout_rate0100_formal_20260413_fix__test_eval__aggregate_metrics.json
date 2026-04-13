@@ -1,0 +1,210 @@
+{
+  "count": 7,
+  "metrics": {
+    "global_rmse": {
+      "mean": 0.0008599983793448528,
+      "std": 0.0009807510186458186
+    },
+    "global_mae": {
+      "mean": 0.00035482645495881176,
+      "std": 0.0003548425897800102
+    },
+    "global_rel_l1_mean": {
+      "mean": 1839.138298760747,
+      "std": 4497.876721274376
+    },
+    "global_rel_l1_active_mean": {
+      "mean": 2.050173607731218,
+      "std": 0.9490445980405474
+    },
+    "global_rel_l2": {
+      "mean": 1.4861582042445936,
+      "std": 0.3335823801009401
+    },
+    "mass_mean_rel_error": {
+      "mean": 0.9322844592895267,
+      "std": 0.23771384307451218
+    }
+  },
+  "rows": [
+    {
+      "case_index": 0,
+      "case_id": "case_0001",
+      "raw_case_name": "0,-150,0,100mlmin",
+      "source_x_mm": "0",
+      "source_y_mm": "-150",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.0003199169983848871,
+      "global_mae": 0.00021026629625859212,
+      "global_rel_l1_mean": 2.3612288656872367,
+      "global_rel_l1_active_mean": 1.6414191156844757,
+      "global_rel_l2": 1.69876757254733,
+      "mass_mean_rel_error": 1.013317833716233,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0001_eval.json"
+    },
+    {
+      "case_index": 1,
+      "case_id": "case_0016",
+      "raw_case_name": "6,200,-300,100",
+      "source_x_mm": "200",
+      "source_y_mm": "-300",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.001283712678412229,
+      "global_mae": 0.00020852153693682446,
+      "global_rel_l1_mean": 3.047880080075944,
+      "global_rel_l1_active_mean": 1.6338438178201833,
+      "global_rel_l2": 1.0284022570662312,
+      "mass_mean_rel_error": 0.9469143665578262,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0016_eval.json"
+    },
+    {
+      "case_index": 2,
+      "case_id": "case_0023",
+      "raw_case_name": "6,200,-150,100",
+      "source_x_mm": "200",
+      "source_y_mm": "-150",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.0003361939897761664,
+      "global_mae": 0.00020731396245448797,
+      "global_rel_l1_mean": 2.933729109083757,
+      "global_rel_l1_active_mean": 1.6490885546730965,
+      "global_rel_l2": 1.5661465683918703,
+      "mass_mean_rel_error": 1.0206853962579123,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0023_eval.json"
+    },
+    {
+      "case_index": 3,
+      "case_id": "case_0024",
+      "raw_case_name": "Q100-X300-Y0-Fraction",
+      "source_x_mm": "300",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.00031799370095807693,
+      "global_mae": 0.00021026198857574137,
+      "global_rel_l1_mean": 2.9914174708395813,
+      "global_rel_l1_active_mean": 1.6748195261462122,
+      "global_rel_l2": 1.7334857732501352,
+      "mass_mean_rel_error": 1.0587426898581462,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0024_eval.json"
+    },
+    {
+      "case_index": 4,
+      "case_id": "case_0025",
+      "raw_case_name": "Q100-X400-Y0-Fraction",
+      "source_x_mm": "400",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.00032051255872960285,
+      "global_mae": 0.00021132747282600597,
+      "global_rel_l1_mean": 3.1249467031282294,
+      "global_rel_l1_active_mean": 1.687989748933319,
+      "global_rel_l2": 1.7188725359660122,
+      "mass_mean_rel_error": 1.056298964643665,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0025_eval.json"
+    },
+    {
+      "case_index": 5,
+      "case_id": "case_0038",
+      "raw_case_name": "6,0,0,0,100",
+      "source_x_mm": "0",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.00032071487142056515,
+      "global_mae": 0.00021209191555807843,
+      "global_rel_l1_mean": 2.8677117565391255,
+      "global_rel_l1_active_mean": 1.6897570362134373,
+      "global_rel_l2": 1.7487736708458215,
+      "mass_mean_rel_error": 1.0722116333158311,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0038_eval.json"
+    },
+    {
+      "case_index": 6,
+      "case_id": "case_0045",
+      "raw_case_name": "6,0,100,0,100",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "100",
+      "global_rmse": 0.0031209438577324417,
+      "global_mae": 0.0012240020121019521,
+      "global_rel_l1_mean": 12856.641177339874,
+      "global_rel_l1_active_mean": 4.374297454647799,
+      "global_rel_l2": 0.9086590516447538,
+      "mass_mean_rel_error": 0.35782033067707375,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/test_eval/eval/case_0045_eval.json"
+    }
+  ],
+  "subgroups": {
+    "low_rates_50_100": {
+      "count": 7,
+      "rates": [
+        50.0,
+        100.0
+      ],
+      "metrics": {
+        "global_rmse": {
+          "mean": 0.0008599983793448528,
+          "std": 0.0009807510186458186
+        },
+        "global_mae": {
+          "mean": 0.00035482645495881176,
+          "std": 0.0003548425897800102
+        },
+        "global_rel_l1_mean": {
+          "mean": 1839.138298760747,
+          "std": 4497.876721274376
+        },
+        "global_rel_l1_active_mean": {
+          "mean": 2.050173607731218,
+          "std": 0.9490445980405474
+        },
+        "global_rel_l2": {
+          "mean": 1.4861582042445936,
+          "std": 0.3335823801009401
+        },
+        "mass_mean_rel_error": {
+          "mean": 0.9322844592895267,
+          "std": 0.23771384307451218
+        }
+      }
+    },
+    "rate_100": {
+      "count": 7,
+      "rates": [
+        100.0
+      ],
+      "metrics": {
+        "global_rmse": {
+          "mean": 0.0008599983793448528,
+          "std": 0.0009807510186458186
+        },
+        "global_mae": {
+          "mean": 0.00035482645495881176,
+          "std": 0.0003548425897800102
+        },
+        "global_rel_l1_mean": {
+          "mean": 1839.138298760747,
+          "std": 4497.876721274376
+        },
+        "global_rel_l1_active_mean": {
+          "mean": 2.050173607731218,
+          "std": 0.9490445980405474
+        },
+        "global_rel_l2": {
+          "mean": 1.4861582042445936,
+          "std": 0.3335823801009401
+        },
+        "mass_mean_rel_error": {
+          "mean": 0.9322844592895267,
+          "std": 0.23771384307451218
+        }
+      }
+    }
+  }
+}

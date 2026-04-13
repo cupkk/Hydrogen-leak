@@ -1,0 +1,22 @@
+{
+  "size_columns": [
+    "space_size_x_m",
+    "space_size_y_m",
+    "space_size_z_m"
+  ],
+  "manifests": [
+    {
+      "manifest_csv": "SDIFT模型\\data\\cfd56_all_T120_interp48_manifest.csv",
+      "count": 56,
+      "missing_size_columns": [
+        "space_size_x_m",
+        "space_size_y_m",
+        "space_size_z_m"
+      ],
+      "size_groups": {}
+    }
+  ],
+  "ready": false,
+  "global_size_groups": {},
+  "message": "Current manifests do not yet contain at least two distinct space sizes; size-generalization experiments cannot be run meaningfully."
+}

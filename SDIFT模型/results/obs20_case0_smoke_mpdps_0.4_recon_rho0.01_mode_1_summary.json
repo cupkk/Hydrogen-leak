@@ -1,0 +1,70 @@
+{
+  "dataset": "obs20_case0_smoke",
+  "result_name": "obs20_case0_smoke_mpdps_0.4_recon_rho0.01_mode_1",
+  "num_cases": 1,
+  "num_posterior_samples": 1,
+  "observed_time_steps": 20,
+  "leak_rate_unit": "mL/min",
+  "rmse_mean": null,
+  "rmse_std": null,
+  "cases": [
+    {
+      "case_index": 0,
+      "source": {
+        "index": [
+          26.0,
+          29.0,
+          8.0
+        ],
+        "position": [
+          0.05319149047136307,
+          0.4936170279979706,
+          -0.2638297975063324
+        ],
+        "strength": 0.5547968149185181,
+        "peak": 2.1423444747924805,
+        "index_mean": [
+          26.0,
+          29.0,
+          8.0
+        ],
+        "index_ci_low": [
+          26.0,
+          29.0,
+          8.0
+        ],
+        "index_ci_high": [
+          26.0,
+          29.0,
+          8.0
+        ],
+        "position_mean": [
+          0.05319149047136307,
+          0.4936170279979706,
+          -0.2638297975063324
+        ],
+        "position_ci_low": [
+          0.05319149047136307,
+          0.4936170279979706,
+          -0.2638297975063324
+        ],
+        "position_ci_high": [
+          0.05319149047136307,
+          0.4936170279979706,
+          -0.2638297975063324
+        ],
+        "strength_mean": 0.5547968149185181,
+        "strength_ci_low": 0.5547968149185181,
+        "strength_ci_high": 0.5547968149185181,
+        "peak_mean": 2.1423444747924805,
+        "peak_ci_low": 2.1423444747924805,
+        "peak_ci_high": 2.1423444747924805,
+        "time_window": 5,
+        "radius": 1,
+        "num_posterior_samples": 1
+      },
+      "leak_rate": null,
+      "source_error": null
+    }
+  ]
+}

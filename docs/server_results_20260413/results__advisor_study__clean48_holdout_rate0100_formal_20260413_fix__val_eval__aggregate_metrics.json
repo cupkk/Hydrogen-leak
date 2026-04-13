@@ -1,0 +1,177 @@
+{
+  "count": 7,
+  "metrics": {
+    "global_rmse": {
+      "mean": 0.001303972714065622,
+      "std": 0.0016494653096357718
+    },
+    "global_mae": {
+      "mean": 0.0005546316799941418,
+      "std": 0.0006857229532467366
+    },
+    "global_rel_l1_mean": {
+      "mean": 1911.4122465126577,
+      "std": 4677.8450034159405
+    },
+    "global_rel_l1_active_mean": {
+      "mean": 1.8621423875296392,
+      "std": 1.8097602777537314
+    },
+    "global_rel_l2": {
+      "mean": 1.0255823173131773,
+      "std": 0.06370742160900605
+    },
+    "mass_mean_rel_error": {
+      "mean": 0.7387175327989464,
+      "std": 0.12169770482953088
+    }
+  },
+  "rows": [
+    {
+      "case_index": 0,
+      "case_id": "case_0002",
+      "raw_case_name": "0,-150,0,200mlmin",
+      "source_x_mm": "0",
+      "source_y_mm": "-150",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.0004072688743564123,
+      "global_mae": 0.00027843282750944867,
+      "global_rel_l1_mean": 1.2742196589209853,
+      "global_rel_l1_active_mean": 1.0472360102942024,
+      "global_rel_l2": 1.0002869380113804,
+      "mass_mean_rel_error": 0.6900266536306621,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0002_eval.json"
+    },
+    {
+      "case_index": 1,
+      "case_id": "case_0015",
+      "raw_case_name": "200,-150,0,200mlmin",
+      "source_x_mm": "200",
+      "source_y_mm": "-150",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.000431977369077839,
+      "global_mae": 0.00026821758690135793,
+      "global_rel_l1_mean": 1.6937171007881067,
+      "global_rel_l1_active_mean": 1.1213169065981283,
+      "global_rel_l2": 1.0477556822992424,
+      "mass_mean_rel_error": 0.7844419400366204,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0015_eval.json"
+    },
+    {
+      "case_index": 2,
+      "case_id": "case_0018",
+      "raw_case_name": "6,200,-300,200",
+      "source_x_mm": "200",
+      "source_y_mm": "-300",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.0019688947037269085,
+      "global_mae": 0.00027087841782000776,
+      "global_rel_l1_mean": 1.7785643017719759,
+      "global_rel_l1_active_mean": 1.1138204502191014,
+      "global_rel_l2": 1.008587357476357,
+      "mass_mean_rel_error": 0.7071294336318508,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0018_eval.json"
+    },
+    {
+      "case_index": 3,
+      "case_id": "case_0028",
+      "raw_case_name": "Q200-X300-Y0-Fraction",
+      "source_x_mm": "300",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.00039619533546784703,
+      "global_mae": 0.0002756938513906804,
+      "global_rel_l1_mean": 1.7877490603975592,
+      "global_rel_l1_active_mean": 1.1467860344687495,
+      "global_rel_l2": 1.0750411050913242,
+      "mass_mean_rel_error": 0.8350826690093378,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0028_eval.json"
+    },
+    {
+      "case_index": 4,
+      "case_id": "case_0029",
+      "raw_case_name": "Q200-X400-Y0-Fraction",
+      "source_x_mm": "400",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.0004011574583408065,
+      "global_mae": 0.0002762711213295624,
+      "global_rel_l1_mean": 1.8973551675568394,
+      "global_rel_l1_active_mean": 1.152251557434253,
+      "global_rel_l2": 1.0694189962538994,
+      "mass_mean_rel_error": 0.8241699013099504,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0029_eval.json"
+    },
+    {
+      "case_index": 5,
+      "case_id": "case_0039",
+      "raw_case_name": "6,0,0,0,200",
+      "source_x_mm": "0",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.00039973169962081914,
+      "global_mae": 0.0002786477966362181,
+      "global_rel_l1_mean": 1.7085283278065797,
+      "global_rel_l1_active_mean": 1.1592821441822159,
+      "global_rel_l2": 1.0888548104290905,
+      "mass_mean_rel_error": 0.8532103012869513,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0039_eval.json"
+    },
+    {
+      "case_index": 6,
+      "case_id": "case_0047",
+      "raw_case_name": "6,0,100,0,200",
+      "source_x_mm": "100",
+      "source_y_mm": "0",
+      "source_z_mm": "0",
+      "leak_rate_ml_min": "200",
+      "global_rmse": 0.005122583557868722,
+      "global_mae": 0.0022342801583717176,
+      "global_rel_l1_mean": 13369.745591971361,
+      "global_rel_l1_active_mean": 6.294303609510825,
+      "global_rel_l2": 0.8891313316309464,
+      "mass_mean_rel_error": 0.4769618306872515,
+      "eval_json": "/hy-tmp/SDIFT_model56/results/advisor_study/clean48_holdout_rate0100_formal_20260413_fix/val_eval/eval/case_0047_eval.json"
+    }
+  ],
+  "subgroups": {
+    "rate_200": {
+      "count": 7,
+      "rates": [
+        200.0
+      ],
+      "metrics": {
+        "global_rmse": {
+          "mean": 0.001303972714065622,
+          "std": 0.0016494653096357718
+        },
+        "global_mae": {
+          "mean": 0.0005546316799941418,
+          "std": 0.0006857229532467366
+        },
+        "global_rel_l1_mean": {
+          "mean": 1911.4122465126577,
+          "std": 4677.8450034159405
+        },
+        "global_rel_l1_active_mean": {
+          "mean": 1.8621423875296392,
+          "std": 1.8097602777537314
+        },
+        "global_rel_l2": {
+          "mean": 1.0255823173131773,
+          "std": 0.06370742160900605
+        },
+        "mass_mean_rel_error": {
+          "mean": 0.7387175327989464,
+          "std": 0.12169770482953088
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+axis,held_out_group,train_count,val_count,test_count
+space_id,space_A,1,0,3
+space_id,space_B,2,1,1
+obstacle_id,obs_none,1,0,3
+obstacle_id,obs_small,2,1,1
+vent_id,vent_low,2,1,1
+vent_id,vent_off,1,0,3

@@ -1,0 +1,32 @@
+[
+  {
+    "mode": "sensor",
+    "selected_alpha": 10.0,
+    "feature_type": "sensor_stats_formal_v1",
+    "test_score": 1.6208668263341057,
+    "source_l2_error_mm_mean": 160.3744665837373,
+    "leak_rate_rel_error_mean": 0.017122160496732562,
+    "leak_rate_mae_ml_min": 3.155763469597145,
+    "model_path": "results/cfd38_holdout400_param_compare/sensor_param_model.json"
+  },
+  {
+    "mode": "hybrid",
+    "selected_alpha": 100.0,
+    "feature_type": "hybrid_stats_formal_v1",
+    "test_score": 5.637527027231871,
+    "source_l2_error_mm_mean": 533.5726623668878,
+    "leak_rate_rel_error_mean": 0.3018004035629926,
+    "leak_rate_mae_ml_min": 58.8477342113067,
+    "model_path": "results/cfd38_holdout400_param_compare/hybrid_param_model.json"
+  },
+  {
+    "mode": "core",
+    "selected_alpha": 100.0,
+    "feature_type": "core_stats_formal_v1",
+    "test_score": 8.060202236957482,
+    "source_l2_error_mm_mean": 544.6342139112963,
+    "leak_rate_rel_error_mean": 2.6138600978445177,
+    "leak_rate_mae_ml_min": 696.2059127077581,
+    "model_path": "results/cfd38_holdout400_param_compare/core_param_model.json"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "scan_roots": [
+    "F:\\氢泄露",
+    "D:\\BaiduNetdiskDownload\\0,-150,0,1000mlmin",
+    "D:\\BaiduNetdiskDownload\\6,100,0,0-1000,800,600"
+  ],
+  "case_count_discovered": 2,
+  "case_count_converted": 2,
+  "skipped_cases": [],
+  "selected_steps": 5,
+  "bins": 48,
+  "interp_k": 8,
+  "interp_power": 2.0,
+  "compression_level": 1,
+  "canonical_bounds": {
+    "u": [
+      -0.5,
+      0.5
+    ],
+    "v": [
+      0.0,
+      0.8
+    ],
+    "w": [
+      -0.4,
+      0.4
+    ]
+  },
+  "output_h5": "data\\pilot2_T5_interp48.h5",
+  "output_meta": "data\\pilot2_T5_interp48_meta.npy",
+  "output_manifest": "data\\pilot2_T5_interp48_manifest.csv",
+  "output_report": "data\\pilot2_T5_interp48_report.json",
+  "output_h5_size_gb": 0.0035,
+  "output_meta_size_mb": 0.5293,
+  "raw_selected_total_gb": 4.5926,
+  "estimated_float32_uncompressed_gb": 0.0041,
+  "conversion_wall_time_sec": 43.1
+}

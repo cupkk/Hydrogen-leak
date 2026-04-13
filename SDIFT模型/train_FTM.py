@@ -1,4 +1,5 @@
 #scaling the computation of tucker core for large-scale data
+import os
 import numpy as np
 import torch
 from torch import  optim
@@ -10,6 +11,8 @@ from datetime import datetime
 from utils import *
 import argparse
 import random
+from torch.utils.data import WeightedRandomSampler
+from sample_weight_utils import load_manifest_rows, compute_sample_weights_from_manifest
 
 
 current_time = datetime.now()
@@ -81,18 +84,31 @@ def training(basis_function, tucker_core,  train_loader, optimizer, loss_fn, los
 
 
 
-def evaluating(basis_function, tucker_core, test_loader, loss_fn, loss_fn2):
+def evaluating(basis_function, tucker_core, test_loader, loss_fn, loss_fn2, device_override=None, ind_input_override=None):
     # set model to training mode
     basis_function.eval()
     # Use tqdm for progress bar
 
     print("evaluating....")
 
-    for i, (data,   batch_ind) in enumerate(test_loader):
-        data = data.to(device, non_blocking=True)
-        batch_ind = batch_ind.to(device, non_blocking=True)
+    device_local = device_override
+    if device_local is None:
+        try:
+            device_local = next(basis_function.parameters()).device
+        except StopIteration:
+            device_local = tucker_core.device
 
-        basises  = basis_function(input_ind_train = ind_input)  # (I1*R1, I2*R2, I3*R3)
+    ind_input_local = ind_input_override
+    if ind_input_local is None:
+        if "ind_input" not in globals():
+            raise RuntimeError("evaluating() requires ind_input when imported outside train_FTM.py main execution.")
+        ind_input_local = ind_input
+
+    for i, (data,   batch_ind) in enumerate(test_loader):
+        data = data.to(device_local, non_blocking=True)
+        batch_ind = batch_ind.to(device_local, non_blocking=True)
+
+        basises  = basis_function(input_ind_train = ind_input_local)  # (I1*R1, I2*R2, I3*R3)
         #core = torch.sin(f*core)
         output = torch.einsum("mi, btijk->btmjk", basises[0], tucker_core[batch_ind,:,:,:,:])
         output = torch.einsum("nj, btmjk->btmnk", basises[1], output)
@@ -143,6 +159,8 @@ if __name__ == "__main__":
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     print("device:", device)
+    os.makedirs("./data", exist_ok=True)
+    os.makedirs("./ckp", exist_ok=True)
 
 
     parser = argparse.ArgumentParser()
@@ -155,6 +173,14 @@ if __name__ == "__main__":
     parser.add_argument("--max_iter", type=int, default=1000)
     parser.add_argument("--save_last", action="store_true", default=False)
     parser.add_argument("--seed", type=int, default=231)
+    parser.add_argument("--manifest_path", type=str, default="", help="Optional manifest CSV aligned with data_path for sample weighting.")
+    parser.add_argument(
+        "--sample_weight_mode",
+        type=str,
+        default="none",
+        choices=["none", "balanced_by_rate", "lowflow_focus_v1", "lowflow_balanced_v1"],
+        help="Optional case-level weighting strategy during training.",
+    )
     config = parser.parse_args()
     set_seed(config.seed)
 
@@ -201,7 +227,21 @@ if __name__ == "__main__":
 
     data = torch.FloatTensor(data_extract)
     train_dataset = TensorDataset(data, batch_ind)
-    train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=False)
+    sampler = None
+    if config.manifest_path and config.sample_weight_mode != "none":
+        manifest_rows = load_manifest_rows(config.manifest_path)
+        if len(manifest_rows) != data_extract.shape[0]:
+            raise ValueError(
+                f"manifest length {len(manifest_rows)} does not match data samples {data_extract.shape[0]}"
+            )
+        sample_weights = compute_sample_weights_from_manifest(manifest_rows, mode=config.sample_weight_mode)
+        sampler = WeightedRandomSampler(
+            weights=torch.as_tensor(sample_weights, dtype=torch.double),
+            num_samples=len(sample_weights),
+            replacement=True,
+        )
+        print("sample_weight_mode:", config.sample_weight_mode, "weights_mean:", float(np.mean(sample_weights)))
+    train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=False, sampler=sampler)
     test_dataset = TensorDataset(data,   batch_ind)
     test_loader = DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
 

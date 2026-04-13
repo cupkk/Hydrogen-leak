@@ -1,0 +1,159 @@
+{
+  "manifest_csv": "exps/scenario_manifest_template.csv",
+  "required_columns": [
+    "case_id",
+    "space_id",
+    "obstacle_id",
+    "vent_id"
+  ],
+  "baseline_iid": {
+    "train_case_ids": [
+      "case_0001",
+      "case_0003",
+      "case_0002"
+    ],
+    "val_case_ids": [
+      "case_0004"
+    ],
+    "test_case_ids": []
+  },
+  "group_splits": {
+    "space_id": [
+      {
+        "axis": "space_id",
+        "held_out_group": "space_A",
+        "train_case_ids": [
+          "case_0004"
+        ],
+        "val_case_ids": [],
+        "test_case_ids": [
+          "case_0001",
+          "case_0002",
+          "case_0003"
+        ]
+      },
+      {
+        "axis": "space_id",
+        "held_out_group": "space_B",
+        "train_case_ids": [
+          "case_0003",
+          "case_0001"
+        ],
+        "val_case_ids": [
+          "case_0002"
+        ],
+        "test_case_ids": [
+          "case_0004"
+        ]
+      }
+    ],
+    "obstacle_id": [
+      {
+        "axis": "obstacle_id",
+        "held_out_group": "obs_none",
+        "train_case_ids": [
+          "case_0003"
+        ],
+        "val_case_ids": [],
+        "test_case_ids": [
+          "case_0001",
+          "case_0002",
+          "case_0004"
+        ]
+      },
+      {
+        "axis": "obstacle_id",
+        "held_out_group": "obs_small",
+        "train_case_ids": [
+          "case_0004",
+          "case_0001"
+        ],
+        "val_case_ids": [
+          "case_0002"
+        ],
+        "test_case_ids": [
+          "case_0003"
+        ]
+      }
+    ],
+    "vent_id": [
+      {
+        "axis": "vent_id",
+        "held_out_group": "vent_low",
+        "train_case_ids": [
+          "case_0001",
+          "case_0002"
+        ],
+        "val_case_ids": [
+          "case_0003"
+        ],
+        "test_case_ids": [
+          "case_0004"
+        ]
+      },
+      {
+        "axis": "vent_id",
+        "held_out_group": "vent_off",
+        "train_case_ids": [
+          "case_0004"
+        ],
+        "val_case_ids": [],
+        "test_case_ids": [
+          "case_0001",
+          "case_0002",
+          "case_0003"
+        ]
+      }
+    ]
+  },
+  "learning_curve_subsets": [
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    },
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    },
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    },
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    },
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    },
+    {
+      "size": 3,
+      "case_ids": [
+        "case_0003",
+        "case_0001",
+        "case_0002"
+      ]
+    }
+  ]
+}
